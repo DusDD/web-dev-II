@@ -1,0 +1,73 @@
+/* Dark blue */
+.dblue
+{
+    background-color: #003785;
+}
+
+/* Dark middle blue */
+.dmblue
+{
+    background-color: #1465bb;
+}
+
+/* Middle blue */
+.mblue
+{
+    background-color: #2196f3;
+}
+
+/* Light middle blue */
+.lmblue
+{
+    background-color: #81c9fa;
+}
+
+/* Light blue */
+.lblue
+{
+    background-color: #b9ffff;
+}
+
+.messages
+{
+    width: 25%;
+    float: left;
+    border: 1px solid black;
+    overflow: auto;
+}
+
+.full-height
+{
+    height: 90vh;
+}
+
+.names:hover
+{
+    background-color: #2196f3
+}
+
+.names
+{
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 4px;
+    width: 91%;
+    text-align: center;
+}
+
+.logo
+{
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.panel
+{
+    border: 1px dashed black;
+    position: fixed;
+    width: 100%;
+    padding: 4px;
+}
