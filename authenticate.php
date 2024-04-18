@@ -37,7 +37,7 @@ if ($action == "login") {
             $_SESSION["logged_in"] = true;
             $_SESSION["username"] = $_POST["name"];
             $_SESSION["id"] = $row["id"];
-            echo "Welcome " . $_SESSION["username"] . "!\n";
+            echo "Welcome " . $_SESSION["username"] . "!<br>";
         } else {
             exit("Incorrect password!");
         }
@@ -56,7 +56,7 @@ if ($action == "login") {
         $insert_stmt = $db->prepare("INSERT INTO accounts (username, password_hash) VALUES (?, ?)");
         $insert_stmt->bind_param("ss", $_POST["name"], $password_hash);
         if ($insert_stmt->execute()) {
-            echo "Registration successful!\n";
+            echo "Registration successful!<br>";
         } else {
             exit("Registration failed. Please try again later.");
         }

@@ -23,7 +23,7 @@ class Database
             echo "Failed to connect to MySQL: " . $this->connection->connect_error;
             exit("Failed to connect to MySQL Database!");
         }
-        echo "Connection information: " . $this->connection->host_info . "\n";
+        echo "Connection information: " . $this->connection->host_info . "<br>";
     }
 
     public static function getConnection()
