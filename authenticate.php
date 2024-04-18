@@ -32,8 +32,7 @@ if ($action == "login") {
     } else {
         $row = $result->fetch_assoc();
         if (password_verify($_POST['password'], $row['password_hash'])) {
-            session_start();
-            $_SESSION['loggedin'] = true;
+            $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $_POST['name'];
             $_SESSION['id'] = $row['id'];
             echo 'Welcome ' . $_SESSION['username'] . '!';
