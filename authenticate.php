@@ -6,14 +6,13 @@ if (!isset($_POST["name"], $_POST["password"])) {
     exit("Please enter a valid name and email address!");
 }
 
-if (!isset($_POST["submitAction"])) {
+if (!isset($_POST["action"])) {
     exit("No submit action set!");
 }
-$action = $_POST["submitAction"];
+$action = $_POST["action"];
 if ($action != "login" && $action != "register") {
-    exit("Invalid value for submitAction: " . $action);
+    exit("Invalid action value: " . $action);
 }
-
 
 // Initialize sessions
 if (session_status() == PHP_SESSION_NONE) {
@@ -23,15 +22,18 @@ if (session_status() == PHP_SESSION_NONE) {
 $db = Database::getConnection();
 
 if ($action == "login") {
-    $stmt = $db->prepare("SELECT * FROM accounts WHERE username = ?");
+    // Check if an account with the given username exists
+    $stmt = $db->prepare("SELECT id, password_hash FROM accounts WHERE username = ?");
     $stmt->bind_param("s", $_POST["name"]);
     $stmt->execute();
     $result = $stmt->get_result();
     if ($result->num_rows === 0) {
         exit("Username does not exist!");
     } else {
+        // Check if the password matches
         $row = $result->fetch_assoc();
         if (password_verify($_POST["password"], $row["password_hash"])) {
+            // Set the session variables
             $_SESSION["logged_in"] = true;
             $_SESSION["username"] = $_POST["name"];
             $_SESSION["id"] = $row["id"];
