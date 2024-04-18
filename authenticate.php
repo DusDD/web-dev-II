@@ -1,11 +1,57 @@
 <?php
-global $pdo;
 include 'database.php';
 
 // Validate the form data
-if (!isset($_POST['name'], $_POST['email'])) {
+if (!isset($_POST['name'], $_POST['password'])) {
     exit('Please enter a valid name and email address!');
 }
 
-$stmt = $pdo->prepare('SELECT * FROM accounts WHERE email = ?');
-$stmt->execute([ $_POST['email'] ]);
+if(!isset($_POST['submitAction'])) {
+    exit("No submit action set!");
+}
+$action = $_POST["submitAction"];
+if ($action != "login" && $action != "register") {
+    exit("Invalid submitAction=".$action);
+}
+
+$db = Database::getConnection();
+
+if ($action == "login"){
+    $stmt=$db->prepare("SELECT * FROM accounts WHERE username = ?");
+    $stmt->bind_param("s", $_POST["name"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows === 0) {
+        exit('Username does not exist!');
+    } else {
+        $row = $result->fetch_assoc();
+        if (password_verify($_POST['password'], $row['password_hash'])) {
+            session_start();
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $_POST['name'];
+            $_SESSION['id'] = $row['id'];
+            echo 'Welcome ' . $_SESSION['username'] . '!';
+        } else {
+            exit('Incorrect password!');
+        }
+    }
+} else if ($action == "register") {
+    // Check if username already exists
+    $check_stmt = $db->prepare("SELECT id FROM accounts WHERE username = ?");
+    $check_stmt->bind_param("s", $_POST["name"]);
+    $check_stmt->execute();
+    $check_result = $check_stmt->get_result();
+    if ($check_result->num_rows > 0) {
+        exit('Username already exists. Please choose a different username.');
+    } else {
+        // Insert new user into the database
+        $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $insert_stmt = $db->prepare("INSERT INTO accounts (username, password_hash) VALUES (?, ?)");
+        $insert_stmt->bind_param("ss", $_POST["name"], $password_hash);
+        if ($insert_stmt->execute()) {
+            echo 'Registration successful!';
+        } else {
+            exit('Registration failed. Please try again later.');
+        }
+    }
+}
