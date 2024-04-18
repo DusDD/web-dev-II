@@ -1,11 +1,11 @@
 <?php
 
 // Import credentials
-require_once('credentials.php');
+require_once("credentials.php");
 
 // Enable error reporting
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set("display_errors", 1);
 
 class Database
 {
@@ -23,7 +23,7 @@ class Database
             echo "Failed to connect to MySQL: " . $this->connection->connect_error;
             exit("Failed to connect to MySQL Database!");
         }
-        echo $this->connection->host_info . "\n";
+        echo "Connection information: " . $this->connection->host_info . "\n";
     }
 
     public static function getConnection()

@@ -1,17 +1,17 @@
 <?php
-include 'database.php';
+include "database.php";
 
 // Validate the form data
-if (!isset($_POST['name'], $_POST['password'])) {
-    exit('Please enter a valid name and email address!');
+if (!isset($_POST["name"], $_POST["password"])) {
+    exit("Please enter a valid name and email address!");
 }
 
-if (!isset($_POST['submitAction'])) {
+if (!isset($_POST["submitAction"])) {
     exit("No submit action set!");
 }
 $action = $_POST["submitAction"];
 if ($action != "login" && $action != "register") {
-    exit("Invalid submitAction=" . $action);
+    exit("Invalid value for submitAction: " . $action);
 }
 
 
@@ -28,16 +28,16 @@ if ($action == "login") {
     $stmt->execute();
     $result = $stmt->get_result();
     if ($result->num_rows === 0) {
-        exit('Username does not exist!');
+        exit("Username does not exist!");
     } else {
         $row = $result->fetch_assoc();
-        if (password_verify($_POST['password'], $row['password_hash'])) {
-            $_SESSION['logged_in'] = true;
-            $_SESSION['username'] = $_POST['name'];
-            $_SESSION['id'] = $row['id'];
-            echo 'Welcome ' . $_SESSION['username'] . '!';
+        if (password_verify($_POST["password"], $row["password_hash"])) {
+            $_SESSION["logged_in"] = true;
+            $_SESSION["username"] = $_POST["name"];
+            $_SESSION["id"] = $row["id"];
+            echo "Welcome " . $_SESSION["username"] . "!\n";
         } else {
-            exit('Incorrect password!');
+            exit("Incorrect password!");
         }
     }
 } else if ($action == "register") {
@@ -47,16 +47,16 @@ if ($action == "login") {
     $check_stmt->execute();
     $check_result = $check_stmt->get_result();
     if ($check_result->num_rows > 0) {
-        exit('Username already exists. Please choose a different username.');
+        exit("Username already exists. Please choose a different username.");
     } else {
         // Insert new user into the database
-        $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
         $insert_stmt = $db->prepare("INSERT INTO accounts (username, password_hash) VALUES (?, ?)");
         $insert_stmt->bind_param("ss", $_POST["name"], $password_hash);
         if ($insert_stmt->execute()) {
-            echo 'Registration successful!';
+            echo "Registration successful!\n";
         } else {
-            exit('Registration failed. Please try again later.');
+            exit("Registration failed. Please try again later.");
         }
     }
 }
