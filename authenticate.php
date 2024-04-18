@@ -6,18 +6,24 @@ if (!isset($_POST['name'], $_POST['password'])) {
     exit('Please enter a valid name and email address!');
 }
 
-if(!isset($_POST['submitAction'])) {
+if (!isset($_POST['submitAction'])) {
     exit("No submit action set!");
 }
 $action = $_POST["submitAction"];
 if ($action != "login" && $action != "register") {
-    exit("Invalid submitAction=".$action);
+    exit("Invalid submitAction=" . $action);
+}
+
+
+// Initialize sessions
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
 
 $db = Database::getConnection();
 
-if ($action == "login"){
-    $stmt=$db->prepare("SELECT * FROM accounts WHERE username = ?");
+if ($action == "login") {
+    $stmt = $db->prepare("SELECT * FROM accounts WHERE username = ?");
     $stmt->bind_param("s", $_POST["name"]);
     $stmt->execute();
     $result = $stmt->get_result();
