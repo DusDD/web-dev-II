@@ -57,10 +57,10 @@
                 }
 
                 // if no chat is/was selected, select the first if it exists
-                let firstChat = $('#chat-list li:first')[0];
-                if (!hasSelection && firstChat !== undefined) {
+                let firstChat = $('#chat-list li:first');
+                if (!hasSelection && firstChat.length !== 0) {
                     // Load messages for the first chat by default
-                    firstChat.classList.add("selected");
+                    firstChat.addClass("selected");
                     loadMessages(firstChat.attr('data-chat-id'));
                 }
             }
