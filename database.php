@@ -21,9 +21,9 @@ class Database
         // Check connection
         if ($this->connection->connect_errno) {
             echo "Failed to connect to MySQL: " . $this->connection->connect_error;
-            exit("Failed to connect to MySQL Database!");
+            exit("Failed to connect to MySQL: " . $this->connection->connect_error);
         }
-        echo "Connection information: " . $this->connection->host_info . "<br>";
+        //echo "Connection information: " . $this->connection->host_info . "<br>";
     }
 
     public static function getConnection()
