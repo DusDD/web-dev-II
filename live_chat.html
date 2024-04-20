@@ -52,9 +52,9 @@
         // reselect the chat that was previously selected
         let hasSelection = false;
         if (selectedChatId !== undefined) {
-            let newSelectedChat = $(`.chat[data-chat-id=${selectedChatId}]`)[0];
-            if (newSelectedChat !== undefined) {
-                newSelectedChat.classList.add("selected");
+            let newSelectedChat = $(`.chat[data-chat-id=${selectedChatId}]`);
+            if (newSelectedChat.length !== 0) {
+                newSelectedChat.addClass("selected");
                 hasSelection = true;
             }
         }
@@ -75,8 +75,8 @@
         // Change chat selection when user clicks on a chat
         $("#chat-list .chat").on("click", _ev => {
             // Deselect previously selected chat and select the clicked chat
-            $("#chat-list .selected").classList.remove("selected");
-            $(this).classList.add("selected");
+            $("#chat-list .selected").removeClass("selected");
+            $(this).addClass("selected");
 
             // Load messages for selected chat
             const chatId = $(this).attr('data-chat-id');
