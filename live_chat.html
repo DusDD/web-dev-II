@@ -41,7 +41,7 @@
             type: 'GET',
             success: function (data) {
                 // save current selected chat
-                const selectedChatId = $("#chat-box .selected").attr("data-chat-id");
+                const selectedChatId = $("#chat-list .selected").attr("data-chat-id");
 
                 // overwrite current html with the new data
                 $('#chat-list').html(data);
@@ -95,7 +95,7 @@
 
     function sendMessage(ev) {
         ev.preventDefault();
-        const selectedChatId = $("#chat-box .selected").attr("data-chat-id");
+        const selectedChatId = $("#chat-list .selected").attr("data-chat-id");
         const message = $('#message-input').val();
 
         if (!selectedChatId) {
