@@ -13,7 +13,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
 if (!isset($_GET["chat_id"])) {
     echo "No chat selected.";
-    exit("Missing chat_id POST value!");
+    exit("Missing chat_id GET value!");
 }
 
 require_once "database.php";

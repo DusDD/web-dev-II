@@ -9,7 +9,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     exit;
 }
 
-if (!isset($_GET["username"])) {
+if (!isset($_POST["username"])) {
     echo json_encode(array());
     exit("Missing username value!");
 }
@@ -19,11 +19,11 @@ $db = Database::getConnection();
 
 // Get user id of receiver
 $user_query = $db->prepare("SELECT id FROM users WHERE username = ?");
-$user_query->bind_param("s", $_GET["username"]);
+$user_query->bind_param("s", $_POST["username"]);
 $user_query->execute();
 $result = $user_query->get_result();
 if ($result->num_rows == 0) {
-    echo "User " . $_GET["username"] . " not found!";
+    echo "User " . $_POST["username"] . " not found!";
     exit();
 }
 $user_row = $result->fetch_assoc();
