@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Convo Chat</title>
+    <link rel="stylesheet" href="style/jquery-ui.css">
+</head>
+<body>
+<h1>Convo Chats</h1>
+
+<div id="chats">
+    <h2>chats:</h2>
+
+    <label for="new-chat-input">
+        User Search:
+        <input type="text" name="new-chat" id="new-chat-input" placeholder="Search for a user...">
+        <button id="new-chat-button">Start chat</button>
+    </label>
+
+    <ul id="chat-list">
+        <!-- chat list will be populated here -->
+    </ul>
+</div>
+
+<div id="chat-box">
+    <!-- Messages will be displayed here -->
+</div>
+
+<form id="message-form">
+    <input type="text" name="message" id="message-input" placeholder="Type your message...">
+    <button type="submit">Send</button>
+</form>
+
+<script src="scripts/jquery-3.7.1.js"></script>
+<script src="scripts/jquery-ui.js"></script>
+<script>
+    function loadChats() {
+        $.ajax({
+            url: 'load_chats.php',
+            type: 'GET',
+            success: function (data) {
+                $('#chat-list').html(data);
+            }
+        });
+    }
+
+    function loadMessages(chatId) {
+        $.ajax({
+            url: 'load_messages.php',
+            type: 'GET',
+            data: {chat_id: chatId},
+            success: function (data) {
+                $('#chat-box').html(data);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        // Load chats on page load
+        loadChats();
+
+        // Load messages for the first chat by default
+        loadMessages($('#chat-list li:first').attr('data-chat-id'));
+
+        // Completion functionality on user search
+        $("#new-chat-input").autocomplete({
+            source: function (request, response) {
+                console.debug(`completing ${request.term}`);
+                $.ajax({
+                    url: "autocomplete_username.php",
+                    dataType: "json",
+                    data: {
+                        search_string: request.term
+                    },
+                    success: function (data) {
+                        console.debug(`completions=${data}`);
+                        response(data);
+                    }
+                });
+            },
+            minLength: 2 // Minimum characters before autocomplete starts
+        });
+
+        // New chat button
+        $("#new-chat-button").on("click", e => {
+            const username = $("#new-chat-input").val().trim();
+            if (username.length === 0) return;
+            console.debug(`starting convo with ${username}`);
+            $.ajax({
+                url: "start_chat.php",
+                type: "POST",
+                data: {username},
+                success: function (data) {
+                    console.debug(`created chat with ${username}`);
+                    loadChats();
+                }
+            });
+        });
+
+        // Click event handler for chat selection
+        $('#chat-list').on('click', 'li', function () {
+            const chatId = $(this).attr('data-chat-id');
+            loadMessages(chatId);
+        });
+
+        // Function to send message
+        $('#message-form').submit(function (e) {
+            e.preventDefault();
+            const message = $('#message-input').val();
+            $.ajax({
+                url: 'send_message.php',
+                type: 'POST',
+                data: {message: message},
+                success: function () {
+                    $('#message-input').val('');
+                    loadMessages($('#chat-list .selected').attr('data-chat-id'));
+                }
+            });
+        });
+
+        // Refresh messages every 5 seconds
+        setInterval(function () {
+            loadChats();
+            loadMessages($('#chat-list .selected').attr('data-chat-id'));
+        }, 5000);
+    });
+</script>
+</body>
+</html>
