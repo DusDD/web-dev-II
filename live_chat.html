@@ -86,7 +86,7 @@
             ev.target.classList.add("selected");
 
             // Load messages for selected chat
-            const chatId = ev.target.attr('data-chat-id');
+            const chatId = ev.target.getAttribute('data-chat-id');
             loadMessages(chatId);
         });
     }
