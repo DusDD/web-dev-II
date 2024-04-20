@@ -95,11 +95,18 @@
 
     function sendMessage(ev) {
         ev.preventDefault();
+        const selectedChatId = $("#chat-box .selected").attr("data-chat-id");
         const message = $('#message-input').val();
+
+        if (!selectedChatId) {
+            console.debug(`Error: Tried to send message, but no chat is selected!`);
+            return;
+        }
+
         $.ajax({
             url: 'send_message.php',
             type: 'POST',
-            data: {message: message},
+            data: {chat_id: parseInt(selectedChatId), message},
             success: function () {
                 // clear message field
                 $('#message-input').val('');
