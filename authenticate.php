@@ -38,6 +38,9 @@ if ($action == "login") {
             $_SESSION["username"] = $_POST["name"];
             $_SESSION["user_id"] = $row["id"];
             echo "Welcome " . $_SESSION["username"] . "!<br>";
+
+            // Redirect to live chat
+            header("Location: live_chat.html");
         } else {
             exit("Incorrect password!");
         }
