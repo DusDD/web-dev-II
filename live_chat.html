@@ -34,38 +34,56 @@
 <script src="scripts/jquery-3.7.1.js"></script>
 <script src="scripts/jquery-ui.js"></script>
 <script>
-
     function loadChats() {
         $.ajax({
             url: 'load_chats.php',
             type: 'GET',
-            success: function (data) {
-                // save current selected chat
-                const selectedChatId = $("#chat-list .selected").attr("data-chat-id");
-
-                // overwrite current html with the new data
-                $('#chat-list').html(data);
-
-                // reselect the chat that was previously selected
-                let hasSelection = false;
-                if (selectedChatId !== undefined) {
-                    let newSelectedChat = $(`.chat[data-chat-id=${selectedChatId}]`)[0];
-                    if (newSelectedChat !== undefined) {
-                        newSelectedChat.classList.add("selected");
-                        hasSelection = true;
-                    }
-                }
-
-                // if no chat is/was selected, select the first if it exists
-                let firstChat = $('#chat-list li:first');
-                if (!hasSelection && firstChat.length !== 0) {
-                    // Load messages for the first chat by default
-                    firstChat.addClass("selected");
-                    loadMessages(firstChat.attr('data-chat-id'));
-                }
-            }
+            success:updateChats
         });
     }
+
+    function updateChats(newHtml) {
+        // save current selected chat
+        const selectedChatId = $("#chat-list .selected").attr("data-chat-id");
+
+        // overwrite current html with the new data
+        $('#chat-list').html(newHtml);
+
+        // reselect the chat that was previously selected
+        let hasSelection = false;
+        if (selectedChatId !== undefined) {
+            let newSelectedChat = $(`.chat[data-chat-id=${selectedChatId}]`)[0];
+            if (newSelectedChat !== undefined) {
+                newSelectedChat.classList.add("selected");
+                hasSelection = true;
+            }
+        }
+
+        // if no chat is/was selected, select the first if it exists
+        let firstChat = $('#chat-list li:first');
+        if (!hasSelection && firstChat.length !== 0) {
+            // Load messages for the first chat by default
+            firstChat.addClass("selected");
+            loadMessages(firstChat.attr('data-chat-id'));
+        }
+
+        // make chats selectable by clicking
+        addChatClickAction();
+    }
+
+    function addChatClickAction() {
+        // Change chat selection when user clicks on a chat
+        $("#chat-list .chat").on("click", _ev => {
+            // Deselect previously selected chat and select the clicked chat
+            $("#chat-list .selected").classList.remove("selected");
+            $(this).classList.add("selected");
+
+            // Load messages for selected chat
+            const chatId = $(this).attr('data-chat-id');
+            loadMessages(chatId);
+        });
+    }
+
 
     function loadMessages(chatId) {
         $.ajax({
@@ -120,24 +138,11 @@
         // Load chats on page load
         loadChats();
 
-        // Change chat selection when user clicks on a chat
-        $("#chat-list .chat").on("click", _ev => {
-            // Deselect previously selected chat and select the clicked chat
-            $("#chat-list .selected").classList.remove("selected");
-            $(this).classList.add("selected");
-
-            // Load messages for selected chat
-            const chatId = $(this).attr('data-chat-id');
-            loadMessages(chatId)
-        });
-
         // Make new chat button create a new chat
         $("#new-chat-button").on("click", startChat);
 
         // Send message if user submits a new message
         $('#message-form').submit(sendMessage);
-
-
 
         // Completion functionality on user search
         $("#new-chat-input").autocomplete({
