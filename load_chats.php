@@ -21,7 +21,10 @@ $chats_query = $db->prepare("
     SELECT DISTINCT ucm.chat_id AS chat_id, users.username AS receiver_name
     FROM user_chat_mappings ucm
     INNER JOIN chats ON ucm.chat_id = chats.id
-    LEFT JOIN user_chat_mappings ucm2 ON chats.type = 'direct' AND ucm2.user_id != ucm.user_id 
+    LEFT JOIN user_chat_mappings ucm2 
+        ON chats.type = 'direct' 
+        AND ucm2.chat_id = ucm.chat_id 
+        AND ucm2.user_id != ucm.user_id 
     LEFT JOIN users ON ucm2.user_id = users.id
     WHERE ucm.user_id = ?
     ORDER BY chats.last_active
