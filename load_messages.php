@@ -32,10 +32,10 @@ $chats_result = $chats_query->get_result();
 
 if($chats_result->num_rows>0) {
     while ($row = $chats_result->fetch_object()) {
-        $message = $row["content"];
-        $date = $row["sent_date"];
+        $message = $row->content;
+        $date = $row->sent_date;
 
-        if ( $row["sender_id"] == $_SESSION["user_id"]) {
+        if ( $row->sender_id == $_SESSION["user_id"]) {
             echo "<p class='message sender-message' style='background-color: green'>$date: $message</p>";
         } else {
             echo "<p class='message receiver-message' style='background-color: white'>$date: $message</p>";
