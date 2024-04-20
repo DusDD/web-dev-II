@@ -34,12 +34,35 @@
 <script src="scripts/jquery-3.7.1.js"></script>
 <script src="scripts/jquery-ui.js"></script>
 <script>
+
     function loadChats() {
         $.ajax({
             url: 'load_chats.php',
             type: 'GET',
             success: function (data) {
+                // save current selected chat
+                const selectedChatId = $("#chat-box .selected").attr("data-chat-id");
+
+                // overwrite current html with the new data
                 $('#chat-list').html(data);
+
+                // reselect the chat that was previously selected
+                let hasSelection = false;
+                if (selectedChatId !== undefined) {
+                    let newSelectedChat = $(`.chat[data-chat-id=${selectedChatId}]`)[0];
+                    if (newSelectedChat !== undefined) {
+                        newSelectedChat.classList.add("selected");
+                        hasSelection = true;
+                    }
+                }
+
+                // if no chat is/was selected, select the first if it exists
+                let firstChat = $('#chat-list li:first')[0];
+                if (!hasSelection && firstChat !== undefined) {
+                    // Load messages for the first chat by default
+                    firstChat.classList.add("selected");
+                    loadMessages(firstChat.attr('data-chat-id'));
+                }
             }
         });
     }
@@ -55,12 +78,59 @@
         });
     }
 
+    function startChat(_ev) {
+        const username = $("#new-chat-input").val().trim();
+        if (username.length === 0) return;
+        console.debug(`starting chat with ${username}`);
+        $.ajax({
+            url: "start_chat.php",
+            type: "POST",
+            data: {username},
+            success: function (data) {
+                console.debug(`created chat with ${username}`);
+                loadChats();
+            }
+        });
+    }
+
+    function sendMessage(ev) {
+        ev.preventDefault();
+        const message = $('#message-input').val();
+        $.ajax({
+            url: 'send_message.php',
+            type: 'POST',
+            data: {message: message},
+            success: function () {
+                // clear message field
+                $('#message-input').val('');
+                // reload messages
+                loadMessages($('#chat-list .selected').attr('data-chat-id'));
+            }
+        });
+    }
+
     $(document).ready(function () {
         // Load chats on page load
         loadChats();
 
-        // Load messages for the first chat by default
-        loadMessages($('#chat-list li:first').attr('data-chat-id'));
+        // Change chat selection when user clicks on a chat
+        $("#chat-list .chat").on("click", _ev => {
+            // Deselect previously selected chat and select the clicked chat
+            $("#chat-list .selected").classList.remove("selected");
+            $(this).classList.add("selected");
+
+            // Load messages for selected chat
+            const chatId = $(this).attr('data-chat-id');
+            loadMessages(chatId)
+        });
+
+        // Make new chat button create a new chat
+        $("#new-chat-button").on("click", startChat);
+
+        // Send message if user submits a new message
+        $('#message-form').submit(sendMessage);
+
+
 
         // Completion functionality on user search
         $("#new-chat-input").autocomplete({
@@ -79,43 +149,6 @@
                 });
             },
             minLength: 2 // Minimum characters before autocomplete starts
-        });
-
-        // New chat button
-        $("#new-chat-button").on("click", e => {
-            const username = $("#new-chat-input").val().trim();
-            if (username.length === 0) return;
-            console.debug(`starting convo with ${username}`);
-            $.ajax({
-                url: "start_chat.php",
-                type: "POST",
-                data: {username},
-                success: function (data) {
-                    console.debug(`created chat with ${username}`);
-                    loadChats();
-                }
-            });
-        });
-
-        // Click event handler for chat selection
-        $('#chat-list').on('click', 'li', function () {
-            const chatId = $(this).attr('data-chat-id');
-            loadMessages(chatId);
-        });
-
-        // Function to send message
-        $('#message-form').submit(function (e) {
-            e.preventDefault();
-            const message = $('#message-input').val();
-            $.ajax({
-                url: 'send_message.php',
-                type: 'POST',
-                data: {message: message},
-                success: function () {
-                    $('#message-input').val('');
-                    loadMessages($('#chat-list .selected').attr('data-chat-id'));
-                }
-            });
         });
 
         // Refresh messages every 5 seconds
