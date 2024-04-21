@@ -26,9 +26,8 @@ function updateChats(newHtml) {
     // if no chat is/was selected, select the first if it exists
     let firstChat = $('.chat-list li:first');
     if (!hasSelection && firstChat.length !== 0) {
-        // Load messages for the first chat by default
+        // Select the first chat by default
         firstChat.addClass("selected");
-        loadMessages(firstChat.attr('data-chat-id'));
     }
 
     // make chats selectable by clicking
@@ -43,20 +42,29 @@ function addChatClickAction() {
         ev.target.classList.add("selected");
 
         // Load messages for selected chat
-        const chatId = ev.target.getAttribute('data-chat-id');
-        loadMessages(chatId);
+        loadMessages();
     });
 }
 
 
-function loadMessages(chatId) {
+function loadMessages() {
+    const selected = $('.chat.selected');
+    const chatId = selected.attr("data-chat-id");
+    const chatName = selected.text();
+
+    if (chatId == null || chatName == null) {
+        $(".chat-name").text("no chat selected");
+        $(".message-container").html("");
+        return;
+    }
+
     $.ajax({
         dataType: "json",
         url: 'load_messages.php',
         type: 'GET',
         data: {chat_id: chatId},
-        success: function (data) {
-            //$('#chat-box').html(data);
+        success: data => {
+            $(".chat-name").text(chatName);
             buildMessages(data);
         }
     });
@@ -67,7 +75,7 @@ function buildMessages(messages) {
     const container = document.querySelector(".message-container");
     container.innerHTML = "";
 
-    messages.forEach(msg=>{
+    messages.forEach(msg => {
         let wrapper = document.createElement("div");
         wrapper.classList.add("message");
         wrapper.classList.add(msg["isSender"] ? "sent" : "received");
@@ -112,7 +120,7 @@ function sendMessage(ev) {
             // clear message field
             $('#new-message__input').val('');
             // reload messages
-            loadMessages($('.chat.selected').attr('data-chat-id'));
+            loadMessages();
         }
     });
 }
@@ -149,6 +157,6 @@ $(document).ready(function () {
     // Refresh messages every 5 seconds
     setInterval(function () {
         loadChats();
-        loadMessages($('.chat.selected').attr('data-chat-id'));
+        loadMessages();
     }, 5000);
 });
