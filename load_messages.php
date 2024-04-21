@@ -12,7 +12,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 }
 
 if (!isset($_GET["chat_id"])) {
-    echo "No chat selected.";
+    echo json_encode([]);
     exit("Missing chat_id GET value!");
 }
 
@@ -26,21 +26,29 @@ $chats_query = $db->prepare("
     WHERE chat_id = ?
     ORDER BY sent_date 
 ");
-$chats_query->bind_param("i",  $_GET["chat_id"]);
+$chats_query->bind_param("i", $_GET["chat_id"]);
 $chats_query->execute();
 $chats_result = $chats_query->get_result();
 
-if($chats_result->num_rows>0) {
+$chats = array();
+if ($chats_result->num_rows > 0) {
     while ($row = $chats_result->fetch_object()) {
         $message = $row->content;
         $date = $row->sent_date;
+        $is_sender = $row->sender_id == $_SESSION["user_id"];
 
+        $chats[] = array("message" => $message, "isSender" => $is_sender);
+
+        /*
         if ( $row->sender_id == $_SESSION["user_id"]) {
             echo "<p class='message sender-message' style='background-color: green'>$date: $message</p>";
         } else {
             echo "<p class='message receiver-message' style='background-color: white'>$date: $message</p>";
         }
+        **/
     }
 }
+
+echo json_encode($chats);
 
 

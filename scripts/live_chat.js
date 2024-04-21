@@ -8,10 +8,10 @@ function loadChats() {
 
 function updateChats(newHtml) {
     // save current selected chat
-    const selectedChatId = $("#chat-list .selected").attr("data-chat-id");
+    const selectedChatId = $(".chat-list .selected").attr("data-chat-id");
 
     // overwrite current html with the new data
-    $('#chat-list').html(newHtml);
+    $('.chat-list').html(newHtml);
 
     // reselect the chat that was previously selected
     let hasSelection = false;
@@ -24,7 +24,7 @@ function updateChats(newHtml) {
     }
 
     // if no chat is/was selected, select the first if it exists
-    let firstChat = $('#chat-list li:first');
+    let firstChat = $('.chat-list li:first');
     if (!hasSelection && firstChat.length !== 0) {
         // Load messages for the first chat by default
         firstChat.addClass("selected");
@@ -37,9 +37,9 @@ function updateChats(newHtml) {
 
 function addChatClickAction() {
     // Change chat selection when user clicks on a chat
-    $("#chat-list .chat").on("click", ev => {
+    $(".chat").on("click", ev => {
         // Deselect previously selected chat and select the clicked chat
-        $("#chat-list .selected").removeClass("selected");
+        $(".chat.selected").removeClass("selected");
         ev.target.classList.add("selected");
 
         // Load messages for selected chat
@@ -55,13 +55,31 @@ function loadMessages(chatId) {
         type: 'GET',
         data: {chat_id: chatId},
         success: function (data) {
-            $('#chat-box').html(data);
+            //$('#chat-box').html(data);
+            buildMessages(data);
         }
     });
 }
 
+function buildMessages(messages) {
+    console.debug(`messages=${messages}`);
+    const container = document.querySelector(".message-container");
+    container.innerHTML = "";
+
+    messages.forEach(msg=>{
+        let wrapper = document.createElement("div");
+        wrapper.classList.add("message");
+        wrapper.classList.add(msg["isSender"] ? "sent" : "received");
+        container.appendChild(wrapper);
+
+        let text = document.createElement("p");
+        text.innerText = msg["message"];
+        wrapper.appendChild(text);
+    });
+}
+
 function startChat(_ev) {
-    const username = $("#new-chat-input").val().trim();
+    const username = $(".new-chat__input").val().trim();
     if (username.length === 0) return;
     console.debug(`starting chat with ${username}`);
     $.ajax({
@@ -77,8 +95,8 @@ function startChat(_ev) {
 
 function sendMessage(ev) {
     ev.preventDefault();
-    const selectedChatId = $("#chat-list .selected").attr("data-chat-id");
-    const message = $('#message-input').val();
+    const selectedChatId = $(".chat.selected").attr("data-chat-id");
+    const message = $('#new-message__input').val();
 
     if (!selectedChatId) {
         console.debug(`Error: Tried to send message, but no chat is selected!`);
@@ -91,9 +109,9 @@ function sendMessage(ev) {
         data: {chat_id: parseInt(selectedChatId), message},
         success: function () {
             // clear message field
-            $('#message-input').val('');
+            $('#new-message__input').val('');
             // reload messages
-            loadMessages($('#chat-list .selected').attr('data-chat-id'));
+            loadMessages($('.chat.selected').attr('data-chat-id'));
         }
     });
 }
@@ -116,13 +134,13 @@ $(document).ready(function () {
     loadChats();
 
     // Make new chat button create a new chat
-    $("#new-chat-button").on("click", startChat);
+    $("#new-chat__button").on("click", startChat);
 
     // Send message if user submits a new message
-    $('#message-form').submit(sendMessage);
+    $('#new-message__form').submit(sendMessage);
 
     // Completion functionality on user search
-    $("#new-chat-input").autocomplete({
+    $("#new-chat__input").autocomplete({
         source: usernameCompletion,
         minLength: 2 // Minimum characters before autocomplete starts
     });
@@ -130,6 +148,6 @@ $(document).ready(function () {
     // Refresh messages every 5 seconds
     setInterval(function () {
         loadChats();
-        loadMessages($('#chat-list .selected').attr('data-chat-id'));
+        loadMessages($('.chat.selected').attr('data-chat-id'));
     }, 5000);
 });
