@@ -2,29 +2,67 @@ function loadChats() {
     $.ajax({
         url: 'load_chats.php',
         type: 'GET',
-        success: updateChats
+        dataType: "json",
+        success: updateChatElements
     });
 }
 
-function updateChats(newHtml) {
-    // save current selected chat
-    const selectedChatId = $(".chat-list .selected").attr("data-chat-id");
+function updateChatElements(chats) {
+    // save current selected chat id, so we can reselect it later
+    const selectedChatId =  $(".chat-list .selected").data("chat-id");
 
-    // overwrite current html with the new data
-    $('.chat-list').html(newHtml);
+    // get list of provided chat ids
+    let updateChatIds = [];
+    chats.forEach(chat => updateChatIds.push(chat["chatId"]));
 
-    // reselect the chat that was previously selected
-    let hasSelection = false;
-    if (selectedChatId) {
-        let newSelectedChat = $(`.chat[data-chat-id=${selectedChatId}]`);
-        if (newSelectedChat.length !== 0) {
-            newSelectedChat.addClass("selected");
-            hasSelection = true;
+    // check if the chat elements must be updated;
+    // if we have exactly the same chats in the same order, skip the update
+    let hasDifference = false;
+
+    // get list of displayed chat ids
+    let existingChatIds = [];
+    $(".chat").each(i => {
+        let chatId = $(this).data("chat-id");
+        existingChatIds.push(chatId);
+
+        if (i >= updateChatIds.length || updateChatIds[i] !== chatId) {
+            hasDifference = true;
         }
+    });
+
+    if (updateChatIds.length !== existingChatIds.length)
+        hasDifference=true;
+
+
+    if (!hasDifference) {
+        // no need for update
+        // TODO: update last active time
+        return;
     }
 
+    // clear existing chats
+    const chatList = $(".chat-list");
+    chatList.html("");
+
+    chats.forEach(chat => {
+        let newChat = $("<li>", {
+            class: "chat",
+            text: chat["name"]
+        });
+        newChat.data("chat-id", chat["chatId"]);
+        // TODO: remove data- attribute
+        newChat.attr("data-chat-id", chat["chatId"]);
+        chatList.append(newChat);
+
+        if (chat["chatId"] === selectedChatId) {
+            newChat.addClass("selected");
+        }
+
+    });
+
     // if no chat is/was selected, select the first if it exists
-    let firstChat = $('.chat-list li:first');
+    let hasSelection = $(".chat.selected").length > 0;
+    let firstChat = $('.chat').first();
     if (!hasSelection && firstChat.length !== 0) {
         // Select the first chat by default
         firstChat.addClass("selected");
@@ -59,18 +97,18 @@ function loadMessages() {
     }
 
     $.ajax({
-        dataType: "json",
         url: 'load_messages.php',
         type: 'GET',
+        dataType: "json",
         data: {chat_id: chatId},
         success: data => {
             $(".chat-name").text(chatName);
-            buildMessages(data);
+            buildMessageElements(data);
         }
     });
 }
 
-function buildMessages(messages) {
+function buildMessageElements(messages) {
     console.debug(`messages=${messages}`);
     const container = document.querySelector(".message-container");
     container.innerHTML = "";

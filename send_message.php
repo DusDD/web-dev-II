@@ -11,17 +11,17 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     exit;
 }
 
+require_once "database.php";
+
 if (!isset($_POST["message"])) {
     exit("Missing message value!");
 } else if (!isset($_POST["chat_id"])) {
     exit("Missing chat id!");
+} else if (!Database::hasUserAccessToChat($_POST["chat_id"])) {
+    exit("Access error: User has no chat with id " . $_POST["chat_id"] . "!");
 }
 
-require_once "database.php";
 $db = Database::getConnection();
-
-// Save the message to the database
-$db = Database::getConnection(); // Assuming Database class has a static getConnection method
 
 // Get the current date
 $current_datetime = date('Y-m-d H:i:s');

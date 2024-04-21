@@ -17,9 +17,14 @@ if (!isset($_GET["chat_id"])) {
 }
 
 require_once "database.php";
+if (!Database::hasUserAccessToChat($_POST["chat_id"])) {
+    echo json_encode([]);
+    exit("Access error: User has no chat with id " . $_POST["chat_id"] . "!");
+}
+
+$db = Database::getConnection();
 
 // Load messages from the database
-$db = Database::getConnection();
 $chats_query = $db->prepare("
     SELECT sender_id, content, sent_date
     FROM messages

@@ -26,6 +26,11 @@ class Database
         //echo "Connection information: " . $this->connection->host_info . "<br>";
     }
 
+    function __destruct()
+    {
+        $this->connection->close();
+    }
+
     public static function getConnection()
     {
         if (self::$db == null) {
@@ -34,9 +39,17 @@ class Database
         return self::$db->connection;
     }
 
-    function __destruct()
-    {
-        $this->connection->close();
-    }
+    public static function hasUserAccessToChat($chatId) {
+        if (!isset($_SESSION["user_id"]) || !is_int($chatId)) {
+            return false;
+        }
 
+        $db = Database::getConnection();
+        $stmt = $db->prepare("SELECT 1 FROM user_chat_mappings WHERE user_id = ? AND chat_id = ?");
+        $stmt->bind_param("ii", $_SESSION["user_id"], $chatId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->num_rows > 0;
+    }
 }
