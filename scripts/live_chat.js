@@ -51,6 +51,7 @@ function addChatClickAction() {
 
 function loadMessages(chatId) {
     $.ajax({
+        dataType: "json",
         url: 'load_messages.php',
         type: 'GET',
         data: {chat_id: chatId},
