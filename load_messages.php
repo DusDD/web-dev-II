@@ -8,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
 if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     // Redirect if user is not logged in
     header("Location: login.html");
-    exit;
+    exit();
 }
 
 if (!isset($_GET["chat_id"])) {
@@ -38,19 +38,8 @@ $chats_result = $chats_query->get_result();
 $chats = array();
 if ($chats_result->num_rows > 0) {
     while ($row = $chats_result->fetch_object()) {
-        $message = $row->content;
-        $date = $row->sent_date;
         $is_sender = $row->sender_id == $_SESSION["user_id"];
-
-        $chats[] = array("message" => $message, "isSender" => $is_sender);
-
-        /*
-        if ( $row->sender_id == $_SESSION["user_id"]) {
-            echo "<p class='message sender-message' style='background-color: green'>$date: $message</p>";
-        } else {
-            echo "<p class='message receiver-message' style='background-color: white'>$date: $message</p>";
-        }
-        **/
+        $chats[] = array("message" => $row->content, "date" => $row->sent_date, "isSender" => $is_sender);
     }
 }
 

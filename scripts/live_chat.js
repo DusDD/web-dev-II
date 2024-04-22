@@ -116,7 +116,7 @@ function buildMessageElements(messages) {
     messages.forEach(msg => {
         let wrapper = document.createElement("div");
         wrapper.classList.add("message");
-        wrapper.classList.add(msg["isSender"] ? "sent" : "received");
+        wrapper.classList.add(msg["is_sender"] ? "sent" : "received");
         container.appendChild(wrapper);
 
         let text = document.createElement("p");
