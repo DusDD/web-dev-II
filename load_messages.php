@@ -39,7 +39,7 @@ $chats = array();
 if ($chats_result->num_rows > 0) {
     while ($row = $chats_result->fetch_object()) {
         $is_sender = $row->sender_id == $_SESSION["user_id"];
-        $chats[] = array("message" => $row->content, "date" => $row->sent_date, "isSender" => $is_sender);
+        $chats[] = array("message" => $row->content, "date" => $row->sent_date, "is_sender" => $is_sender);
     }
 }
 
