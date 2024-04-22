@@ -1,5 +1,9 @@
 <?php
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Import credentials
 require_once("credentials.php");
 
@@ -40,14 +44,16 @@ class Database
     }
 
     public static function hasUserAccessToChat($chatId) {
-        if (!isset($_SESSION["user_id"]) || !is_int($chatId)) {
+        if (!isset($_SESSION) || !isset($_SESSION["user_id"])) {
             return false;
         }
 
         $db = Database::getConnection();
         $stmt = $db->prepare("SELECT 1 FROM user_chat_mappings WHERE user_id = ? AND chat_id = ?");
         $stmt->bind_param("ii", $_SESSION["user_id"], $chatId);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            return false;
+        }
         $result = $stmt->get_result();
 
         return $result->num_rows > 0;
