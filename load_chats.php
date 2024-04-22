@@ -40,8 +40,7 @@ if($chats_result->num_rows>0) {
     while ($row = $chats_result->fetch_object()) {
         $chat_id = $row->chat_id;
         $receiver = $row->receiver_name;
-        $chats[] = array("chatId" => $chat_id, "name" => $receiver);
-        // echo "<li class='chat' data-chat-id='{$chat_id}'>{$receiver}</li>";
+        $chats[] = array("chat_id" => $chat_id, "name" => $receiver);
     }
 }
 echo json_encode($chats);

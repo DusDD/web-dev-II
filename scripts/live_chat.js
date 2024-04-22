@@ -13,7 +13,7 @@ function updateChatElements(chats) {
 
     // get list of provided chat ids
     let updateChatIds = [];
-    chats.forEach(chat => updateChatIds.push(chat["chatId"]));
+    chats.forEach(chat => updateChatIds.push(chat["chat_id"]));
 
     // check if the chat elements must be updated;
     // if we have exactly the same chats in the same order, skip the update
@@ -45,16 +45,17 @@ function updateChatElements(chats) {
     chatList.html("");
 
     chats.forEach(chat => {
+        let chatId = chat["chat_id"];
         let newChat = $("<li>", {
             class: "chat",
             text: chat["name"]
         });
-        newChat.data("chat-id", chat["chatId"]);
+        newChat.data("chat-id", );
         // TODO: remove data- attribute
-        newChat.attr("data-chat-id", chat["chatId"]);
+        newChat.attr("data-chat-id", chatId);
         chatList.append(newChat);
 
-        if (chat["chatId"] === selectedChatId) {
+        if (chatId === selectedChatId) {
             newChat.addClass("selected");
         }
 
