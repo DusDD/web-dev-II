@@ -1,0 +1,13 @@
+# We need a stylesheet with common design of the three php pages we want to create: login page, chat page, admin page
+# the common designs consist of the following topics:
+  - colourscheme
+  - borderlines (eg. Inputboxes)
+  - fondstyle
+  - fondsize
+  - fondcolour
+  - favicon.png
+
+# also include/think about the following:
+  - responsive design
+  - tell the browser that responsive design already is implemented in the page
+
