@@ -40,7 +40,7 @@ if ($action == "login") {
             echo "Welcome " . $_SESSION["username"] . "!<br>";
 
             // Redirect to live chat
-            header("Location: live_chat.html");
+            header("Location: live_chat.php");
         } else {
             exit("Incorrect password!");
         }

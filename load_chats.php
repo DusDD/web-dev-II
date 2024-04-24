@@ -17,6 +17,8 @@ require_once "database.php";
 $db = Database::getConnection();
 $user_id = $_SESSION["user_id"];
 
+// select the chat_id and username of the receiving user for each chat
+// if the chat is a group chat username should be null
 $chats_query = $db->prepare("
     SELECT DISTINCT ucm.chat_id AS chat_id, users.username AS receiver_name
     FROM user_chat_mappings ucm
@@ -29,15 +31,16 @@ $chats_query = $db->prepare("
     WHERE ucm.user_id = ?
     ORDER BY chats.last_active
 ");
-
 $chats_query->bind_param("i", $user_id);
 $chats_query->execute();
 $chats_result = $chats_query->get_result();
 
+$chats = array();
 if($chats_result->num_rows>0) {
     while ($row = $chats_result->fetch_object()) {
         $chat_id = $row->chat_id;
         $receiver = $row->receiver_name;
-        echo "<li class='chat' data-chat-id='{$chat_id}'>{$receiver}</li>";
+        $chats[] = array("chat_id" => $chat_id, "name" => $receiver);
     }
 }
+echo json_encode($chats);
