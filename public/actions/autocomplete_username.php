@@ -19,7 +19,7 @@ if (!isset($_GET["search_string"]) || strlen($_GET['search_string']) == 0) {
     exit("Missing search value!");
 }
 
-require_once "database.php";
+require_once "../database/database.php";
 $db = Database::getConnection();
 
 // Sanitize the input to prevent SQL injection

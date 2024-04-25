@@ -14,7 +14,7 @@ if (!isset($_POST["username"])) {
     exit("Missing username value!");
 }
 
-require_once "database.php";
+require_once "../database/database.php";
 $db = Database::getConnection();
 
 // Get user id of receiver

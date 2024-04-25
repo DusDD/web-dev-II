@@ -1,5 +1,5 @@
 <?php
-include "database.php";
+include "../database/database.php";
 
 // Validate the form data
 if (!isset($_POST["name"], $_POST["password"])) {
@@ -44,7 +44,7 @@ if ($action == "login") {
     echo "Welcome " . $_SESSION["username"] . "!<br>";
 
     // Redirect to live chat
-    header("Location: live_chat.php");
+    header("Location: /live_chat.php");
 
 } else if ($action == "register") {
     // Check if username already exists

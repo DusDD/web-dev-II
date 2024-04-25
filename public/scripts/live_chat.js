@@ -1,6 +1,6 @@
 function loadChats() {
     $.ajax({
-        url: 'load_chats.php',
+        url: '/actions/load_chats.php',
         type: 'GET',
         dataType: "json",
         success: updateChatElements
@@ -98,7 +98,7 @@ function loadMessages() {
     }
 
     $.ajax({
-        url: 'load_messages.php',
+        url: '/actions/load_messages.php',
         type: 'GET',
         dataType: "json",
         data: {chat_id: chatId},
@@ -131,7 +131,7 @@ function startChat(_ev) {
     if (username.length === 0) return;
     console.debug(`starting chat with ${username}`);
     $.ajax({
-        url: "start_chat.php",
+        url: "/actions/start_chat.php",
         type: "POST",
         data: {username},
         success: function (data) {
@@ -152,7 +152,7 @@ function sendMessage(ev) {
     }
 
     $.ajax({
-        url: 'send_message.php',
+        url: '/actions/send_message.php',
         type: 'POST',
         data: {chat_id: parseInt(selectedChatId), message},
         success: function () {
@@ -166,7 +166,7 @@ function sendMessage(ev) {
 
 function usernameCompletion(request, response) {
     $.ajax({
-        url: "autocomplete_username.php",
+        url: "/actions/autocomplete_username.php",
         dataType: "json",
         data: {
             search_string: request.term
