@@ -29,22 +29,23 @@ if ($action == "login") {
     $result = $stmt->get_result();
     if ($result->num_rows === 0) {
         exit("Username does not exist!");
-    } else {
-        // Check if the password matches
-        $row = $result->fetch_assoc();
-        if (password_verify($_POST["password"], $row["password_hash"])) {
-            // Set the session variables
-            $_SESSION["logged_in"] = true;
-            $_SESSION["username"] = $_POST["name"];
-            $_SESSION["user_id"] = $row["id"];
-            echo "Welcome " . $_SESSION["username"] . "!<br>";
-
-            // Redirect to live chat
-            header("Location: live_chat.php");
-        } else {
-            exit("Incorrect password!");
-        }
     }
+
+    // Check if the password matches
+    $row = $result->fetch_assoc();
+    if (!password_verify($_POST["password"], $row["password_hash"])) {
+        exit("Incorrect password!");
+    }
+
+    // Set the session variables
+    $_SESSION["logged_in"] = true;
+    $_SESSION["username"] = $_POST["name"];
+    $_SESSION["user_id"] = $row["id"];
+    echo "Welcome " . $_SESSION["username"] . "!<br>";
+
+    // Redirect to live chat
+    header("Location: live_chat.php");
+
 } else if ($action == "register") {
     // Check if username already exists
     $check_stmt = $db->prepare("SELECT id FROM users WHERE username = ?");
@@ -53,15 +54,15 @@ if ($action == "login") {
     $check_result = $check_stmt->get_result();
     if ($check_result->num_rows > 0) {
         exit("Username already exists. Please choose a different username.");
+    }
+
+    // Insert new user into the database
+    $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $insert_stmt = $db->prepare("INSERT INTO users (username, password_hash) VALUES (?, ?)");
+    $insert_stmt->bind_param("ss", $_POST["name"], $password_hash);
+    if ($insert_stmt->execute()) {
+        echo "Registration successful!<br>";
     } else {
-        // Insert new user into the database
-        $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
-        $insert_stmt = $db->prepare("INSERT INTO users (username, password_hash) VALUES (?, ?)");
-        $insert_stmt->bind_param("ss", $_POST["name"], $password_hash);
-        if ($insert_stmt->execute()) {
-            echo "Registration successful!<br>";
-        } else {
-            exit("Registration failed. Please try again later.");
-        }
+        exit("Registration failed. Please try again later.");
     }
 }
