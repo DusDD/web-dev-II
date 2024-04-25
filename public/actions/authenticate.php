@@ -44,7 +44,7 @@ if ($action == "login") {
     echo "Welcome " . $_SESSION["username"] . "!<br>";
 
     // Redirect to live chat
-    header("Location: /live_chat.php");
+    header("Location: /public/live_chat.php");
 
 } else if ($action == "register") {
     // Check if username already exists
