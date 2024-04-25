@@ -50,7 +50,7 @@ function updateChatElements(chats) {
             class: "chat",
             text: chat["name"]
         });
-        newChat.data("chat-id", );
+        newChat.data("chat-id", chatId);
         // TODO: remove data- attribute
         newChat.attr("data-chat-id", chatId);
         chatList.append(newChat);
@@ -88,7 +88,8 @@ function addChatClickAction() {
 
 function loadMessages() {
     const selected = $('.chat.selected');
-    const chatId = selected.attr("data-chat-id");
+    // const chatId = selected.attr("data-chat-id");
+    const chatId = selected.data("chat-id");
     const chatName = selected.text();
 
     if (chatId == null || chatName == null) {
