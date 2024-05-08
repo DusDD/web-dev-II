@@ -7,11 +7,11 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     // Redirect if user is not logged in
-    header("Location: authenticate.php");
+    header("Location: /public/login.html");
     exit;
 }
 
-require_once "database.php";
+require_once "../database/database.php";
 
 if (!isset($_POST["message"])) {
     exit("Missing message value!");

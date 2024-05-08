@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     // Redirect if user is not logged in
-    header("Location: authenticate.php");
+    header("Location: /public/login.html");
     exit;
 }
 
@@ -14,7 +14,7 @@ if (!isset($_POST["username"])) {
     exit("Missing username value!");
 }
 
-require_once "database.php";
+require_once "../database/database.php";
 $db = Database::getConnection();
 
 // Get user id of receiver
