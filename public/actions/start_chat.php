@@ -30,6 +30,8 @@ $user_row = $result->fetch_assoc();
 $other_user_id = $user_row["id"];
 $user_query->close();
 
+//TODO: check if there is already a chat with the person
+
 // Insert new chat
 $success = $db->query("INSERT INTO chats (type) VALUES ('direct')");
 if (!$success) {
@@ -38,6 +40,7 @@ if (!$success) {
 // Save the newly created chat id
 $new_chat_id = $db->insert_id;
 
+//TODO check functionality 
 // Add participants to chat
 $map_query = $db->prepare("INSERT INTO user_chat_mappings (user_id, chat_id) VALUES (?,?)");
 $map_query->bind_param("ii", $_SESSION["user_id"], $new_chat_id);
