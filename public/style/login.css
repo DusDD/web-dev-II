@@ -6,7 +6,7 @@ body{
     align-items: center;
     min-height: 100vh;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #0046ae, #6ba6ff, #0046ae);
+    background: linear-gradient(to bottom, #264b67, #4682B4, #264b67);
 }
 
 .main{
