@@ -26,18 +26,17 @@ body{
 
 label{
 	color: #fff;
-	font-size: 2.3em;
 	justify-content: center;
 	display: flex;
-	margin: 60px;
+	margin: 2%;
 	font-weight: bold;
 	cursor: pointer;
-	transition: .5s ease-in-out;
 }
+
 input{
 	width: 60%;
 	height: 20px;
-	background: #e0dede;
+	background: #c9e7ff;
 	justify-content: center;
 	display: flex;
 	margin: 20px auto;
@@ -45,19 +44,6 @@ input{
 	border: none;
 	outline: none;
 	border-radius: 5px;
-}
-
-.login{
-	height: 460px;
-	background: white;
-	border-radius: 60% / 10%;
-	transform: translateY(-180px);
-	transition: .8s ease-in-out;
-}
-
-.login label{
-	color: #4682B4;
-	transform: scale(.6);
 }
 
 button{
@@ -68,16 +54,12 @@ button{
 	display: block;
 	color: #fff;
 	background: #4682B4;
-	font-size: 1em;
-	font-weight: bold;
-	margin-top: 20px;
-	outline: none;
-	border: none;
-	border-radius: 5px;
-	transition: .2s ease-in;
 	cursor: pointer;
 }
 
-button:hover{
-	background: #4682B4;
+img{
+	display: block;
+  	margin-left: auto;
+  	margin-right: auto;
+  	width: 50%;
 }
