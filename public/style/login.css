@@ -39,8 +39,8 @@ input{
 	background: #bcd7ff;
 	justify-content: center;
 	display: flex;
-	margin: 20px auto;
-	padding: 10px;
+	margin: 5% auto;
+	padding: 2%;
 	border: none;
 	outline: none;
 	border-radius: 5px;
@@ -49,10 +49,12 @@ input{
 button{
 	width: 60%;
 	height: 40px;
-	margin: 10px auto;
+	margin: 5% auto;
 	justify-content: center;
 	display: block;
 	color: #fff;
+	border: none;
+	border-radius: 20px;
 	background: #217aff;
 	cursor: pointer;
 }
