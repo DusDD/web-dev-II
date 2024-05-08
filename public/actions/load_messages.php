@@ -16,7 +16,7 @@ if (!isset($_GET["chat_id"])) {
     exit("Missing chat_id GET value!");
 }
 
-require_once "database.php";
+require_once "../database/database.php";
 if (!Database::hasUserAccessToChat($_GET["chat_id"])) {
     echo json_encode([]);
     exit("Access error: User has no chat with id " . $_GET["chat_id"] . "!");
