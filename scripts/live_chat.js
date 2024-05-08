@@ -50,8 +50,7 @@ function updateChatElements(chats) {
             class: "chat",
             text: chat["name"]
         });
-        newChat.data("chat-id", );
-        // TODO: remove data- attribute
+        newChat.data("chat-id", chatId);
         newChat.attr("data-chat-id", chatId);
         chatList.append(newChat);
 
@@ -88,7 +87,7 @@ function addChatClickAction() {
 
 function loadMessages() {
     const selected = $('.chat.selected');
-    const chatId = selected.attr("data-chat-id");
+    const chatId = selected.data("chat-id");
     const chatName = selected.text();
 
     if (chatId == null || chatName == null) {
@@ -134,7 +133,7 @@ function startChat(_ev) {
         url: "start_chat.php",
         type: "POST",
         data: {username},
-        success: function (data) {
+        success: () => {
             console.debug(`created chat with ${username}`);
             loadChats();
         }
@@ -143,7 +142,7 @@ function startChat(_ev) {
 
 function sendMessage(ev) {
     ev.preventDefault();
-    const selectedChatId = $(".chat.selected").attr("data-chat-id");
+    const selectedChatId = $(".chat.selected").data("chat-id");
     const message = $('#new-message__input').val();
 
     if (!selectedChatId) {

@@ -10,6 +10,7 @@ require_once("credentials.php");
 // Enable error reporting
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 class Database
 {
@@ -44,7 +45,7 @@ class Database
     }
 
     public static function hasUserAccessToChat($chatId) {
-        if (!isset($_SESSION) || !isset($_SESSION["user_id"])) {
+        if (session_status() == PHP_SESSION_NONE || !isset($_SESSION["user_id"])) {
             return false;
         }
 
