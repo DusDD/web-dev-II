@@ -9,7 +9,7 @@ body {
 }
 
 .wave {
-    background: rgba(215, 252, 255, 0.5);
+    background: rgba(189, 215, 255);
     border-radius: 1000% 1000% 0 0;
     position: fixed;
     width: 200%;
@@ -31,7 +31,7 @@ body {
 .wave:nth-of-type(3) {
     bottom: -2.5em;
     animation: wave 20s -1s reverse infinite;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 @keyframes wave {
@@ -76,9 +76,9 @@ label {
 }
 
 input {
-    width: calc(100% - 10px);
+    width: calc(100% - 15px);
     height: 20px;
-    background: #bcd7ff;
+    background: rgb(189, 215, 255);
     padding: 10px;
     border: none;
     border-radius: 5px;
