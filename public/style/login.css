@@ -93,7 +93,7 @@ input::placeholder{
 
 .button-group {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 button {
@@ -104,7 +104,9 @@ button {
     border-radius: 5px;
     background: #217aff;
     cursor: pointer;
-    transition: transform 200ms;;
+    transition: transform 200ms;
+	margin-left: 10px;
+	margin-right: 5px;
 }
 
 button:hover {
