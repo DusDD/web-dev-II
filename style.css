@@ -1,39 +1,68 @@
-body {
+body 
+{
     font-family: Arial, sans-serif; /* Establece la fuente de texto */
     margin: 0; /* Elimina el margen predeterminado */
     padding: 0; /* Elimina el relleno predeterminado */
 }
 
-.container {
+.container 
+{
     display: flex; /* Establece el contenedor principal como flexbox */
     height: 100vh; /* Establece la altura del contenedor al 100% del viewport */
 }
 
-.users {
+.users 
+{
     width: 20%; /* Establece el ancho del área de usuarios */
-    background-color: #f2f2f2; /* Establece el color de fondo */
     padding: 20px; /* Añade un relleno alrededor del contenido */
+    overflow-y: auto; /* Añade una barra de desplazamiento vertical si es necesario */
 }
 
-.chat {
+.user-name 
+{
+    float: left;
+    border-bottom: 1px solid #848080d3;
+    margin-bottom: 10px;
+}
+
+.user-name:hover
+{
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: rgba(245, 245, 245, 0.592);
+}
+
+.username_name
+{
+    float: left;
+    display: flex; /* Establece el contenedor como flexbox */
+    align-items: center; /* Centra verticalmente los elementos dentro del contenedor */
+}
+
+
+.chat 
+{
     flex: 1; /* El área de chat ocupará el espacio restante */
     display: flex; /* Establece el área de chat como flexbox */
     flex-direction: column; /* Los elementos dentro del área de chat se apilan verticalmente */
+    background-image: url("public/images/background.webp")
 }
 
-.messages {
+.messages 
+{
     flex: 1; /* Las áreas de mensajes ocuparán el espacio restante */
     overflow-y: auto; /* Añade una barra de desplazamiento vertical si es necesario */
     padding: 20px; /* Añade un relleno alrededor del contenido */
 }
 
-.input-container {
+.input-container 
+{
     display: flex; /* Establece el área de entrada como flexbox */
-    align-items: center; /* Centra verticalmente los elementos dentro del contenedor */
     padding: 20px; /* Añade un relleno alrededor del contenido */
 }
 
-input[type="text"] {
+input[type="text"] 
+{
     flex: 1; /* El campo de entrada ocupará todo el espacio disponible */
     padding: 10px; /* Añade un relleno alrededor del contenido */
     font-size: 16px; /* Establece el tamaño de fuente */
@@ -41,13 +70,34 @@ input[type="text"] {
     border-radius: 5px; /* Establece la esquina redondeada */
 }
 
-button {
+button 
+{
     padding: 10px 20px; /* Establece el relleno dentro del botón */
     font-size: 16px; /* Establece el tamaño de fuente */
-    background-color: #4CAF50; /* Establece el color de fondo */
+    background-color: 	#4682B4; /* Establece el color de fondo */
     color: white; /* Establece el color del texto */
     border: none; /* Elimina el borde */
     border-radius: 5px; /* Establece la esquina redondeada */
     margin-left: 10px; /* Establece el margen a la izquierda */
     cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+.chat_with
+{
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.863);
+    margin-top: 0px;
+    padding: 10px;
+}
+
+.imagen_circulo 
+{
+    float: left;
+    width: 12%;
+    border-radius: 50%; /* Aplica un borde redondeado */
+    overflow: hidden; /* Oculta cualquier contenido fuera del borde */
+    margin-right: 10px; /* Añade un margen a la derecha para separar la imagen del nombre de usuario */
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
