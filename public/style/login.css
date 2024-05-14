@@ -1,12 +1,60 @@
 body{
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #214058, #2e67be, #214058);
+	margin: auto;
+
+}
+
+.wave {
+    background: rgb(255 255 255 / 25%);
+    border-radius: 1000% 1000% 0 0;
+    position: fixed;
+    width: 200%;
+    height: 12em;
+    animation: wave 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.8;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.wave:nth-of-type(2) {
+    bottom: -1.25em;
+    animation: wave 18s linear reverse infinite;
+    opacity: 0.8;
+}
+
+.wave:nth-of-type(3) {
+    bottom: -2.5em;
+    animation: wave 20s -1s reverse infinite;
+    opacity: 0.9;
+}
+
+@keyframes wave {
+    2% {
+        transform: translateX(1);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(1);
+    }
 }
 
 .box{
@@ -49,18 +97,22 @@ button{
 	border-radius: 5px;
 	background: #217aff;
 	cursor: pointer;
+	transition: transform 250ms;
 }
 
 button:hover {
     background-color: #0040a0;
+	transform: scale(1.1);
 }
 
 img{
-	padding-top: 20%;
-	padding-bottom: 6%;
+	padding-top: 12%;
+	padding-bottom:5%;
 	justify-content: center;
 	display: block;
   	margin-left: auto;
   	margin-right: auto;
-  	width: 50%;
+  	width: 80%;
 }
+
+
