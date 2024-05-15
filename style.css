@@ -40,7 +40,7 @@ body
 }
 
 
-.chat 
+.chat-window 
 {
     flex: 1; /* El área de chat ocupará el espacio restante */
     display: flex; /* Establece el área de chat como flexbox */
@@ -48,14 +48,14 @@ body
     background-image: url("public/images/background.webp")
 }
 
-.messages 
+.message-container 
 {
     flex: 1; /* Las áreas de mensajes ocuparán el espacio restante */
     overflow-y: auto; /* Añade una barra de desplazamiento vertical si es necesario */
     padding: 20px; /* Añade un relleno alrededor del contenido */
 }
 
-.input-container 
+.new-message__form 
 {
     display: flex; /* Establece el área de entrada como flexbox */
     padding: 20px; /* Añade un relleno alrededor del contenido */
@@ -81,7 +81,7 @@ button
     margin-left: 10px; /* Establece el margen a la izquierda */
     cursor: pointer; /* Cambia el cursor al pasar por encima */
 }
-.chat_with
+.chat-name
 {
     text-align: center;
     text-transform: uppercase;
@@ -102,13 +102,12 @@ button
     margin-bottom: 5px;
 }
 
-.search_users
-{
-    width: 50%;
-    box-sizing: border-box;
-    float: left;
-    padding-right: 10px;
-
+.new-chat__input {
+    flex-grow: 1;
+    padding: 0.2em;
+    margin-right: .3em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 #new-chat__button
