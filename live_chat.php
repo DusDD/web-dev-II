@@ -17,7 +17,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Convo</title> <!-- Define el título de la página -->
     <link rel="stylesheet" href="/public/style/jquery-ui.css">
-    <link rel="stylesheet" href="/public/style/style.css"> <!-- Enlaza el archivo CSS para estilos -->
+    <link rel="stylesheet" href="style.css"> <!-- Enlaza el archivo CSS para estilos -->
     <link rel="icon" href="/public/images/favicon.png" type="image/x-icon"> <!-- Enlaza el favicon -->
 </head>
 <body>
@@ -29,14 +29,14 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
                 <button id="new-chat__button">Chat</button>
             </span>
         </div>
-        <div class="chat">
-            <div class="chat_with">Lukas</div>
+        <div class="chat-window">
+            <div class="chat-name">Lukas</div>
             <div class="message-container">
                 <!-- Aquí se insertarán los mensajes -->
             </div>
             <form id="new-message__form" action="#">
-            <textarea id="new-message__input" name="message" placeholder="Type your message"></textarea>
-            <button id="send-message__button" type="submit">Send</button>
+                <textarea id="new-message__input" name="message" placeholder="Type your message"></textarea>
+                <button id="send-message__button" type="submit">Send</button>
             </form>
         </div>
     </div>
