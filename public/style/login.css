@@ -6,6 +6,8 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #214058, #2e67be, #214058);
     margin: 0;
+    height: 100%;   /*stops scrolling*/
+    overflow: hidden;
 }
 
 .wave {
