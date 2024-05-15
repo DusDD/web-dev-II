@@ -11,7 +11,7 @@ body
     height: 100vh; /* Establece la altura del contenedor al 100% del viewport */
 }
 
-.users 
+.chat-list__container 
 {
     width: 20%; /* Establece el ancho del área de usuarios */
     padding: 20px; /* Añade un relleno alrededor del contenido */
@@ -101,3 +101,20 @@ button
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.search_users
+{
+    width: 50%;
+    box-sizing: border-box;
+    float: left;
+    padding-right: 10px;
+
+}
+
+#new-chat__button
+{
+    width: 40%;
+    box-sizing: border-box;
+    float: left;
+}
+
