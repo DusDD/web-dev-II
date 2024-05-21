@@ -1,10 +1,22 @@
-body {
+body.blue {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #214058, #2e67be, #214058);
+    margin: 0;
+    height: 100%;   /*stops scrolling*/
+    overflow: hidden;
+}
+
+body.yellow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #726c3d, #fff296, #726c3d);
     margin: 0;
     height: 100%;   /*stops scrolling*/
     overflow: hidden;
@@ -77,7 +89,18 @@ label {
     margin-bottom: 10px;
 }
 
-input {
+input.yellow {
+    width: calc(100% - 15px);
+    height: 20px;
+    background: rgb(255, 251, 147);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+	text-align: center;
+}
+
+input.blue {
     width: calc(100% - 15px);
     height: 20px;
     background: rgb(189, 215, 255);
@@ -88,9 +111,14 @@ input {
 	text-align: center;
 }
 
-input::placeholder{
+input.blue::placeholder{
 	text-align: center;
 	color: #2e67be;
+ }
+
+ input.yellow::placeholder{
+	text-align: center;
+	color: #fff296;
  }
 
 .button-group {
@@ -98,7 +126,7 @@ input::placeholder{
     justify-content: space-evenly;
 }
 
-button {
+button.blue {
     flex: 1;
     height: 40px;
     color: #fff;
@@ -111,12 +139,30 @@ button {
 	margin-right: 5px;
 }
 
-button:hover {
+button.blue:hover {
     background-color: #0040a0;
     transform: scale(1.1);
 }
 
-img {
+button.yellow {
+    flex: 1;
+    height: 40px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background: #fff296;
+    cursor: pointer;
+    transition: transform 200ms;
+	margin-left: 10px;
+	margin-right: 5px;
+}
+
+
+.button1 {
+    float: right;
+}
+
+img.blue {
     width: 100%;
     max-width: 300px;
     display: block;
