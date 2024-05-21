@@ -7,7 +7,7 @@ select {
 /* wave animation */
 
 .wave {
-    background: rgba(189, 215, 255);
+    background: white;
     border-radius: 1000% 1000% 0 0;
     position: fixed;
     width: 200%;
@@ -121,6 +121,7 @@ img {
     max-width: 300px;
     display: block;
     margin: 0 auto 20px;
+
 }
 
 /* blue design*/
@@ -148,7 +149,7 @@ button.blue:hover{
 /* yellow design */
 
 body.yellow {
-    background: linear-gradient(to bottom, #d0b700, #fff296, #d0b700);
+    background: linear-gradient(to bottom, #82761c, #ffe837, #82761c);
 }
 
 input.yellow {
@@ -160,7 +161,7 @@ input.yellow::placeholder{
  }
 
 button.yellow {
-    background: #d0b700;
+    background: #ffe837;
 }
 
 button.yellow:hover {
