@@ -1,26 +1,10 @@
-body.blue {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #214058, #2e67be, #214058);
-    margin: 0;
-    height: 100%;   /*stops scrolling*/
-    overflow: hidden;
+
+select {
+    float: right;
+    position: relative;
 }
 
-body.yellow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #726c3d, #fff296, #726c3d);
-    margin: 0;
-    height: 100%;   /*stops scrolling*/
-    overflow: hidden;
-}
+/* wave animation */
 
 .wave {
     background: rgba(189, 215, 255);
@@ -50,26 +34,34 @@ body.yellow {
 
 @keyframes wave {
     2% {
-        transform: translateX(1);
+        transform: translateX(0);
     }
-
     25% {
         transform: translateX(-25%);
     }
-
     50% {
         transform: translateX(-50%);
     }
-
     75% {
         transform: translateX(-25%);
     }
-
     100% {
-        transform: translateX(1);
+        transform: translateX(0);
     }
 }
 
+/* overall design */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;   /*stops scrolling*/
+    overflow: hidden;
+}
 
 .box {
     width: 90%;
@@ -89,10 +81,9 @@ label {
     margin-bottom: 10px;
 }
 
-input.yellow {
+input {
     width: calc(100% - 15px);
     height: 20px;
-    background: rgb(255, 251, 147);
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -100,25 +91,8 @@ input.yellow {
 	text-align: center;
 }
 
-input.blue {
-    width: calc(100% - 15px);
-    height: 20px;
-    background: rgb(189, 215, 255);
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 15px;
+input::placeholder{
 	text-align: center;
-}
-
-input.blue::placeholder{
-	text-align: center;
-	color: #2e67be;
- }
-
- input.yellow::placeholder{
-	text-align: center;
-	color: #fff296;
  }
 
 .button-group {
@@ -126,45 +100,70 @@ input.blue::placeholder{
     justify-content: space-evenly;
 }
 
-button.blue {
+button {
     flex: 1;
     height: 40px;
     color: #fff;
     border: none;
     border-radius: 5px;
-    background: #217aff;
     cursor: pointer;
     transition: transform 200ms;
 	margin-left: 10px;
 	margin-right: 5px;
 }
 
-button.blue:hover {
-    background-color: #0040a0;
+button:hover {
     transform: scale(1.1);
 }
 
-button.yellow {
-    flex: 1;
-    height: 40px;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    background: #fff296;
-    cursor: pointer;
-    transition: transform 200ms;
-	margin-left: 10px;
-	margin-right: 5px;
-}
-
-
-.button1 {
-    float: right;
-}
-
-img.blue {
+img {
     width: 100%;
     max-width: 300px;
     display: block;
     margin: 0 auto 20px;
 }
+
+/* blue design*/
+
+body.blue{
+    background: linear-gradient(to bottom, #214058, #2e67be, #214058);
+}
+
+input.blue{
+    background: rgb(189, 215, 255);
+}
+
+input.blue::placeholder{
+    color: #2e67be;
+}
+
+button.blue{
+    background: #217aff;
+}
+
+button.blue:hover{
+    background-color: #0040a0;
+}
+
+/* yellow design */
+
+body.yellow {
+    background: linear-gradient(to bottom, #d0b700, #fff296, #d0b700);
+}
+
+input.yellow {
+    background: #fff296;
+}
+
+input.yellow::placeholder{
+	color: #d0b700;
+ }
+
+button.yellow {
+    background: #d0b700;
+}
+
+button.yellow:hover {
+    background-color: #d0b700;
+}
+
