@@ -156,7 +156,7 @@ button.blue:hover{
 /* yellow design */
 
 body.yellow {
-    background: linear-gradient(to bottom, #d78c00, #f4da15, #d78c00);
+    background: linear-gradient(to bottom, #d5ad0d, #ffeb55, #d5ad0d);
 }
 
 input.yellow {
@@ -164,14 +164,14 @@ input.yellow {
 }
 
 input.yellow::placeholder{
-	color: #d78c00;
+	color: #d5ad0d;
  }
 
 button.yellow {
-    background: #f4da15;
+    background: #ffe100;
 }
 
 button.yellow:hover {
-    background-color: #d78c00;
+    background-color: #d5ad0d;
 }
 
