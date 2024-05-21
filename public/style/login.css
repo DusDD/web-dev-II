@@ -1,4 +1,5 @@
 
+
 select {
     position: fixed;  
     bottom: 5%;     
@@ -7,7 +8,7 @@ select {
     font-size: 16px;  
     z-index: 1000;    
     border: none;
-    border-radius: 5px;
+    outline: 0;
 }
 
 
@@ -155,7 +156,7 @@ button.blue:hover{
 /* yellow design */
 
 body.yellow {
-    background: linear-gradient(to bottom, #82761c, #ffe837, #82761c);
+    background: linear-gradient(to bottom, #d78c00, #f4da15, #d78c00);
 }
 
 input.yellow {
@@ -163,14 +164,14 @@ input.yellow {
 }
 
 input.yellow::placeholder{
-	color: #d0b700;
+	color: #d78c00;
  }
 
 button.yellow {
-    background: #ffe837;
+    background: #f4da15;
 }
 
 button.yellow:hover {
-    background-color: #d0b700;
+    background-color: #d78c00;
 }
 
