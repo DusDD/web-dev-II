@@ -1,8 +1,15 @@
 
-select {
-    float: right;
-    position: relative;
+#select {
+    position: fixed;  
+    bottom: 5%;     
+    right: 5%;      
+    padding: 10px;    
+    font-size: 16px;  
+    z-index: 1000;    
+    border: none;
+    border-radius: 5px;
 }
+
 
 /* wave animation */
 
@@ -121,7 +128,6 @@ img {
     max-width: 300px;
     display: block;
     margin: 0 auto 20px;
-
 }
 
 /* blue design*/
