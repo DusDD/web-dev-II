@@ -67,9 +67,7 @@ if ($action == "login") {
         } else {
             exit("Registration failed. Please try again later.");
         }
-    } else{
-        exit("Password to short!")
-    }   
+    }
 
 
     
