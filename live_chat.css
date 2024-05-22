@@ -25,3 +25,23 @@ body {
     text-align: center;
     border-bottom: 1px dashed grey;
 }
+
+.username {
+    width: 80%;
+    border-bottom: 1px solid black;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    font-size: 105%;
+    padding: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Suaviza la transición */
+    background-color: #f0f8ff; /* Color de fondo inicial */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.username:hover {
+    transform: scale(1.1); /* Hace un zoom del 10% */
+    background-color: #e0f7ff; /* Cambio de color de fondo en hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+

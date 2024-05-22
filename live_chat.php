@@ -9,6 +9,9 @@
     <body>
         <div class="linke_seite">
             <h1 class="convo_chat">Convo chats</h1>
+            <div class="username">
+                Maria
+            </div>
         </div>
         <div class="rechte_seite">
             <form action="send_message.php" method="post">
