@@ -29,7 +29,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         <h2>Convo Chats</h2>
         <span class="new-chat__container">
             <input type="text" name="new-chat" class="input" placeholder="Search for a user...">
-            <button id="button">Chat</button>
+            <button id="new-chat__button" class="button">Chat</button>
         </span>
 
         <ul class="chat-list">
@@ -47,7 +47,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
         <form id="new-message__form" action="#">
             <textarea class="input" name="message" placeholder="Type your message"></textarea>
-            <button id="button" type="submit">Send</button>
+            <button id="send-message__button" class="button" type="submit">Send</button>
         </form>
 
     </div>
