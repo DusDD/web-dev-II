@@ -24,11 +24,12 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 <?php include "main_menue.html"; ?>
 
 <div class="container">
+
     <div class="chat-list__container">
         <h2>Convo Chats</h2>
         <span class="new-chat__container">
-            <input type="text" name="new-chat" class="new-chat__input" placeholder="Search for a user...">
-            <button id="new-chat__button">Chat</button>
+            <input type="text" name="new-chat" class="input" placeholder="Search for a user...">
+            <button id="button">Chat</button>
         </span>
 
         <ul class="chat-list">
@@ -45,8 +46,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
         </div>
 
         <form id="new-message__form" action="#">
-            <textarea id="new-message__input" name="message" placeholder="Type your message"></textarea>
-            <button id="send-message__button" type="submit">Send</button>
+            <textarea class="input" name="message" placeholder="Type your message"></textarea>
+            <button id="button" type="submit">Send</button>
         </form>
 
     </div>

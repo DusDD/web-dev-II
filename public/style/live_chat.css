@@ -22,7 +22,10 @@ body {
 
 /* Chat list container styles */
 .chat-list__container {
+    float: left;
     background-color: #fff;
+    width: 25%;
+    height: 100%;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -40,28 +43,38 @@ body {
     margin-bottom: 20px;
 }
 
-.new-chat__input {
+.input {
     flex: 1;
-    padding: 10px;
+    width: 85%;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
 }
 
-#new-chat__button {
-    padding: 10px 20px;
+#button {
+    width: 15%;
+    padding: 8px;
+    margin: 5px;
     background-color: #217aff;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+}
+#button:hover {
+    transform: scale(0.9);
+    background-color: #217aff;
 }
 
 /* Chat window styles */
 .chat-window {
-    margin-left: 20px;
-    flex: 1;
+    float: right;
+    width: 65%;
+    height: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .chat-window h2 {
@@ -78,23 +91,20 @@ body {
     overflow-y: auto;
 }
 
-#new-message__input {
-    width: calc(100% - 80px);
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-#send-message__button {
-    padding: 10px 20px;
+#button {
+    width: 15%;
+    padding: 8px;
+    margin: 5px;
     background-color: #217aff;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+}
+
+#button:hover {
+    transform: scale(0.9);
+    background-color: #0040a0;
 }
 
 /* Styling for links in the menu */
