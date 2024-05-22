@@ -80,7 +80,7 @@ body {
 @media (prefers-color-scheme: dark) {
     body {
         color: rgb(220, 217, 212);
-        background-color:rgb(24, 26, 27);
+        background-color:#181a1b;
     }
 
     .message {

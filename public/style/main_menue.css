@@ -1,0 +1,59 @@
+html {
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(to bottom, #214058, #2e67be, #214058);
+}
+
+/* menue on the left (always displayed)*/
+
+.menue{
+    display: flex;
+    width: 25%;
+    height: 100vh;
+    float: left;
+    background-color: white;
+    flex-direction: column;
+    padding: 2%;
+    margin: 2%;
+    border-radius: 1.5vh;
+}
+
+.menue img{
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.menue button {  /* links */
+    border: none;
+    border-radius: 1.5vh;
+    cursor: pointer;
+    transition: transform 200ms;
+    color: white;
+    background-color: #217aff;
+    margin: 2%;
+    padding: 5%;
+    width:100%;
+    box-sizing: border-box;
+}
+
+.menue button:hover{
+    transform: scale(1.1);
+    background-color: #0040a0;
+}
+
+/* whatever the user selected on the menue */
+
+.from-menue-selected {
+    width: 75%;
+    height: 100vh;
+    float: right;
+    background-color: white;
+    flex-direction: column;
+    padding: 2%;
+    margin: 2%;
+    border-radius: 1.5vh;
+}
+
