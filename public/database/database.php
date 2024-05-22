@@ -17,8 +17,8 @@ require_once("credentials.php");
 class Database
 {
 
-    private static $db;
-    private $connection;
+    private static Database $db;
+    private PDO $connection;
 
     private function __construct()
     {
@@ -37,22 +37,7 @@ class Database
         }
     }
 
-    public static function hasUserAccessToChat($chatId)
-    {
-        if (session_status() == PHP_SESSION_NONE || !isset($_SESSION["user_id"])) {
-            return false;
-        }
-
-        $db = Database::getConnection();
-        $stmt = $db->prepare("SELECT 1 FROM user_chat_mappings WHERE user_id = :user_id AND chat_id = :chat_id");
-        $stmt->bindParam(":user_id", $_SESSION["user_id"], PDO::PARAM_INT);
-        $stmt->bindParam(":chat_id", $chatId, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt->rowCount() > 0;
-    }
-
-    public static function getConnection()
+    public static function getConnection(): PDO
     {
         if (self::$db == null) {
             self::$db = new Database();
@@ -60,8 +45,4 @@ class Database
         return self::$db->connection;
     }
 
-    function __destruct()
-    {
-        $this->connection->close();
-    }
 }

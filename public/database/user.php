@@ -5,40 +5,21 @@ require "chat.php";
 
 class User
 {
-    private $user_id;
-    private $username;
+    private int $user_id;
+    private string $username;
 
-    private $chats;
+    private array $chats;
 
-    public function __construct($user_id, $username)
+    public function __construct(int $user_id, string $username)
     {
-        // Assume a user with the given user id really exists
-        // TODO: double check for validity
+        // Assume a user with the provided attributes exists
         $this->user_id = $user_id;
         $this->username = $username;
-        $this->chats = array();
+        $this->chats = [];
     }
 
-    public static function register($username, $password)
-    {
-        if (User::usernameExists($username)) {
-            return false;
-        }
 
-        // hash the password to prevent leaks
-        $password_hash = password_hash($password, PASSWORD_DEFAULT);
-
-        // Insert the user into the database
-        $db = Database::getConnection();
-        $stmt = $db->prepare("INSERT INTO users (username, password_hash) VALUES (:username, :password_hash)");
-        $stmt->bindParam(":username", $username);
-        $stmt->bindParam(":password_hash", $password_hash);
-        $stmt->execute();
-
-        return true;
-    }
-
-    public static function usernameExists($username)
+    public static function usernameExists(string $username): bool
     {
         $db = Database::getConnection();
         $stmt = $db->prepare("SELECT id FROM users WHERE username = :username");
@@ -48,17 +29,7 @@ class User
         return $stmt->rowCount() > 0;
     }
 
-    public static function userExists($user_id)
-    {
-        $db = Database::getConnection();
-        $stmt = $db->prepare("SELECT id FROM users WHERE id = :user_id");
-        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt->rowCount() > 0;
-    }
-
-    public static function fromUserId($user_id)
+    public static function getByUserId(int $user_id): User|false
     {
         // Search for user with the given username
         $db = Database::getConnection();
@@ -76,7 +47,7 @@ class User
         return new User($user_id, $row["username"]);
     }
 
-    public static function getByUsername($username)
+    public static function getByUsername(string $username): User|false
     {
         // Search for user with the given username
         $db = Database::getConnection();
@@ -94,39 +65,79 @@ class User
         return new User($row["id"], $username);
     }
 
-
-    public function loadChats()
+    public function getUsername(): string
     {
-        $db = Database::getConnection();
-
-        $other_user_query = $db->prepare("
-            SELECT user_id, username
-            FROM user_chat_mappings ucm
-            INNER JOIN users ON ucm.user_id = users.id
-            WHERE ucm.chat_id = :chat_id AND ucm.user_id != :cur_user_id
-        ");
-
-        $chats_query = $db->prepare("
-            SELECT chat_id, type, creation_date, last_active
-            FROM user_chat_mappings ucm 
-            INNER JOIN chats ON ucm.chat_id = chats.id
-            WHERE ucm.user_id = :user_id
-            ORDER BY last_active DESC 
-        ");
-        $chats_query->bindParam(":user_id", $this->user_id, PDO::PARAM_INT);
-        $this->chats = array();
-        while ($row = $chats_query->fetch(PDO::FETCH_ASSOC)) {
-            if ($row["type"] == "direct") {
-                $other_user_query->bindParam(":chat_id", $row["chat_id"], PDO::PARAM_INT);
-                $other_user_query->bindParam(":cur_user_id", $this->user_id, PDO::PARAM_INT);
-                $other_user_query->execute();
-                $user_row = $other_user_query->fetch(PDO::FETCH_ASSOC);
-                $other_user = new User($user_row["user_id"], $user_row["username"]);
-
-                $this->chats[] = new DirectChat($row["chat_id"], $other_user, $row["creation_date"], $row["last_active"]);
-            } else {
-                $this->chats[] = new GroupChat($row["chat_id"], $row["creation_date"], $row["last_active"]);
-            }
-        }
+        return $this->username;
     }
+
+    public function createDirectChatWith(User $other_user): false|DirectChat
+    {
+        // ensure no direct chat between the users exists
+        if ($this->hasDirectChatWith($other_user)) {
+            return false;
+        }
+
+        // insert new chat and save the corresponding chat id
+        $db = Database::getConnection();
+        $db->query("INSERT INTO chats (type) VALUES ('direct')");
+        $new_chat_id = $db->lastInsertId();
+
+        // map the chat to this user
+        $map_stmt = $db->prepare("INSERT INTO user_chat_mappings (user_id, chat_id) VALUES (:user_id,:chat_id)");
+        $map_stmt->bindParam(":user_id", $this->user_id, PDO::PARAM_INT);
+        $map_stmt->bindParam(":chat_id", $new_chat_id, PDO::PARAM_INT);
+        $map_stmt->execute();
+
+        // map the chat to other user
+        $userId = $other_user->getUserId();
+        $map_stmt->bindParam(":user_id", $userId, PDO::PARAM_INT);
+        $map_stmt->execute();
+
+        // create and return new chat object
+        $new_chat = new DirectChat($new_chat_id);
+        $this->chats[] = $new_chat;
+        return $new_chat;
+    }
+
+    public function hasDirectChatWith(User $other_user): bool
+    {
+        // get the chat ids for all direct chats from this user
+        $my_direct_chats = array_filter($this->getChats(), function ($chat) {
+            return $chat instanceof DirectChat;
+        }, ARRAY_FILTER_USE_BOTH);
+        $my_direct_chat_ids = array_map(function ($chat) {
+            return $chat->getChatId();
+        }, $my_direct_chats);
+        // get all chat ids for the other user:
+        //      filtering for direct chats is not needed, as all elements of the intersection
+        //      must be part of my_direct_chat_ids
+        $other_chat_ids = array_map(function ($chat) {
+            return $chat->getChatId();
+        }, $other_user->getChats());
+
+
+        // check if a chat is a direct chat from this user and a chat from the other user
+        $shared_chats = array_intersect($my_direct_chat_ids, $other_chat_ids);
+        return !empty($shared_chats);
+    }
+
+    public function getChats(): array
+    {
+        if (empty($this->chats)) {
+            $this->loadChats();
+        }
+        return $this->chats;
+    }
+
+    public function loadChats(): void
+    {
+        $this->chats = Chat::loadChatsForUser($this->user_id);
+    }
+
+    public function getUserId(): int
+    {
+        return $this->user_id;
+    }
+
+
 }

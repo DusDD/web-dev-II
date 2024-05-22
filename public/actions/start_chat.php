@@ -1,18 +1,23 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+include "../database/user_session.php";
 
-if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
+
+if (!UserSession::isLoggedIn()) {
     // Redirect if user is not logged in
-    header("Location: /public/login.html");
+    header("Location: /login.html");
     exit;
 }
 
-if (!isset($_POST["username"])) {
+if (!isset($_POST["type"])) {
+    echo json_encode(array());
+    exit("Missing chat type!");
+} else if (!isset($_POST["username"])) {
     echo json_encode(array());
     exit("Missing username value!");
 }
+
+
+// TODO: REPLACE OLD CODE BELOW
 
 require_once "../database/database.php";
 $db = Database::getConnection();

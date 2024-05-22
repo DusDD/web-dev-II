@@ -2,40 +2,48 @@
 
 require_once "database.php";
 
-class Message {
+class Message
+{
 
-    private $message_id;
-    private $sender_id;
-    private $content;
-    private $sent_date;
+    private int $message_id;
+    private int $sender_id;
+    private string $content;
+    private string $sent_date;
 
-    public function __construct($message_id, $sender_id, $content, $sent_date)
+    private function __construct(int $message_id, int $sender_id, int $content, string $sent_date)
     {
         $this->message_id = $message_id;
         $this->sender_id = $sender_id;
         $this->content = $content;
         $this->sent_date = $sent_date;
-
     }
 
-    public static function fromMessageId($msg_id) {
+    public static function loadMessagesForChat(int $chatId): array
+    {
         $db = Database::getConnection();
-        $stmt = $db->prepare("SELECT sender_id, content, sent_date FROM messages WHERE id = :msg_id");
-        $stmt->bindParam(":msg_id", $msg_id);
+        $stmt = $db->prepare("SELECT * FROM messages WHERE chat_id = :chat_id");
+        $stmt->bindParam(":chat_id", $chatId, PDO::PARAM_INT);
         $stmt->execute();
-        if ($stmt->rowCount() == 0) {
-            // chat doesn't exists
-            return false;
-        }
 
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        try {
-            $sent_date = new DateTime($row["sent_date"]);
-        } catch (Exception $e) {
-            // error parsing date
-            return false;
+        $messages = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $messages[] = new self($row['id'], $row['sender_id'], $row['content'], $row['sent_date']);
         }
+        return $messages;
+    }
 
-        return new Message($msg_id, $row["sender_id"], $row["content"], $sent_date);
+    public function getSenderId(): int
+    {
+        return $this->sender_id;
+    }
+
+    public function getContent(): int|string
+    {
+        return $this->content;
+    }
+
+    public function getSentDate(): string
+    {
+        return $this->sent_date;
     }
 }
