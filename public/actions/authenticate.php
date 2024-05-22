@@ -67,7 +67,9 @@ if ($action == "login") {
         } else {
             exit("Registration failed. Please try again later.");
         }
-    } 
+    }else{
+        exit("Passwort ist zu kurz. Muss mind 8 Zeichen lang sein!")
+    }
 
 
     
