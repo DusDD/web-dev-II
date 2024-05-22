@@ -43,7 +43,7 @@ if ($action == "login") {
     $_SESSION["user_id"] = $row["id"];
 
     // Redirect to live chat
-    header("Location: /public/live_chat.php");
+    header("Location: /live_chat.php");
 
 } else if ($action == "register") {
     // Check if username already exists
@@ -67,7 +67,7 @@ if ($action == "login") {
         } else {
             exit("Registration failed. Please try again later.");
         }
-    }
+    }   
 
 
     

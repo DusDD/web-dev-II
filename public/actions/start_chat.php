@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     // Redirect if user is not logged in
-    header("Location: /public/login.html");
+    header("Location: /login.html");
     exit;
 }
 
@@ -31,6 +31,8 @@ $other_user_id = $user_row["id"];
 $user_query->close();
 
 //TODO: check if there is already a chat with the person
+
+
 
 // Insert new chat
 $success = $db->query("INSERT INTO chats (type) VALUES ('direct')");
