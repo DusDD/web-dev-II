@@ -1,0 +1,27 @@
+body {
+    display: flex;
+    min-height: 100vh;   /*stops scrolling*/
+    overflow: hidden;
+    margin: 0;
+}
+
+.linke_seite
+{
+    width: 20%;
+    border-right: 1px solid black;
+    box-sizing: border-box;
+}
+
+.rechte_seite
+{
+    width: 80%;
+    background-image: url(background.png);
+}
+
+
+.convo_chat
+{
+    color: #217aff;
+    text-align: center;
+    border-bottom: 1px dashed grey;
+}

@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Website</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="chat-container">
-        <div class="chat-messages">
-            <!-- Chat messages will be displayed here -->
+<html>
+    <head>
+        <title> Convo</title>
+        <meta charset="utf8">
+        <link rel="stylesheet" href="live_chat.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="linke_seite">
+            <h1 class="convo_chat">Convo chats</h1>
         </div>
-        <input type="text" id="message-input" placeholder="Type your message...">
-        <button id="send-button">Send</button>
-    </div>
-    <script src="script.js"></script>
-</body>
+        <div class="rechte_seite">
+            <form action="send_message.php" method="post">
+                <input type="text" id="nombre" name="nombre">
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </body>
 </html>
