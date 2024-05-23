@@ -74,6 +74,7 @@ button:hover {
     align-items: center;
     padding: 1em;
     margin: 0.5em;
+    flex-direction: column;
 }
 
 .chat-list:hover {
