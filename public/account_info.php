@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="style/main_menue.css">
 </head>
 <body>
-<!--navigationbar-->
-<?php include "main_menue.html"; ?>
+        
+    <!--navigationbar-->
+    <?php include "main_menue.html"; ?>
 
 </body>
 </html>
