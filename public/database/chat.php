@@ -38,7 +38,8 @@ abstract class Chat
         }
     }
 
-    public static function chatExists($chat_id): bool {
+    public static function chatExists($chat_id): bool
+    {
         $db = Database::getConnection();
         $stmt = $db->prepare("
             SELECT 1
@@ -175,11 +176,10 @@ class DirectChat extends Chat
         parent::__construct($chat_id);
         assert(count($this->participants) == 2, "DirectChat has invalid number of participants!");
 
-        // extract id from not logged in user
-        $my_user_id = UserSession::getUserId();
+        // figure out what participant is not the logged in user
         $user1 = $this->participants[0];
         $user2 = $this->participants[1];
-        $this->other_user = $user1 == $my_user_id ? $user2 : $user1;
+        $this->other_user = $user1->getUserId() == UserSession::getUserId() ? $user2 : $user1;
     }
 
 

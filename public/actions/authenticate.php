@@ -17,6 +17,7 @@ $password = $_POST["password"];
 
 
 if (UserSession::isLoggedIn()) {
+    header("Location: /live_chat.php");
     exit("User is already logged in!");
 }
 
