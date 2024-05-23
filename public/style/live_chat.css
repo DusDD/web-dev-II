@@ -77,7 +77,16 @@ button:hover {
     flex-direction: column;
 }
 
-.chat-list:hover {
+.chat-list li {
+    background: #ffefef;
+    padding: 1em;
+    margin: 0.5em;
+    flex-direction: column;
+    border: none;
+    border-radius: 0.5em;
+}
+
+.chat-list li:hover {
     background: #d7f1ed;
 }
 
