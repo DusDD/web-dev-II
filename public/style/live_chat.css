@@ -27,7 +27,7 @@ button {
     border: none;
     border-radius: 0.5em;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1em;
     padding: 0.5em;
     margin: 0.5em;
 }
@@ -41,7 +41,7 @@ button:hover {
 .container {
     display: grid;
     grid-template-columns: 1fr 3fr;  
-    grid-template-rows: auto auto; 
+    grid-template-rows: auto 1fr; 
     grid-template-areas: 
         "navbar navbar"
         "chat-list-container chat-window-container";
