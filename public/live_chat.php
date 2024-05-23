@@ -27,9 +27,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     <div class="chat-list__container">
         <h2>Convo Chats</h2>
-        <span class="new-chat__container">
+        <span class="new-chat__container" action="actions/start_chat.php">
             <input type="text" name="new-chat" class="input" placeholder="Search for a user...">
-            <button id="new-chat__button" class="button">Chat</button>
+            <button id="new-chat__button">Chat</button>
         </span>
 
         <ul class="chat-list">
@@ -45,9 +45,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             <!-- Messages of the selected chat will be inserted here -->
         </div>
 
-        <form id="new-message__form" action="#">
+        <form id="new-message__form" action="actions/send_message.php">
             <textarea class="input" name="message" placeholder="Type your message"></textarea>
-            <button id="send-message__button" class="button" type="submit">Send</button>
+            <button id="new-message__button" type="submit">Send</button>
         </form>
 
     </div>

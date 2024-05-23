@@ -91,7 +91,7 @@ body {
     overflow-y: auto;
 }
 
-.button {
+#new-chat__button {
     width: 15%;
     padding: 8px;
     margin: 5px;
@@ -102,7 +102,23 @@ body {
     cursor: pointer;
 }
 
-.button:hover {
+#new-chat__button:hover {
+    transform: scale(0.9);
+    background-color: #0040a0;
+}
+
+#new-message__button {
+    width: 15%;
+    padding: 8px;
+    margin: 5px;
+    background-color: #217aff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#new-message__button:hover {
     transform: scale(0.9);
     background-color: #0040a0;
 }
@@ -123,6 +139,8 @@ a:hover {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+    width: auto;
+    height: auto;
 }
 
 .message.sent {
@@ -132,4 +150,6 @@ a:hover {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+    width: auto;
+    height: auto;
 }
