@@ -46,8 +46,8 @@ button:hover {
         "navbar navbar"
         "chat-list-container chat-window-container";
     gap: 0;
-    width: 100%;
-    height: 100%; 
+    width: 100vh;
+    height: 100vh; 
     padding-top: 0;
 } 
 
