@@ -12,7 +12,7 @@ $action = $_POST["action"];
 if ($action != "login" && $action != "register") {
     exit("Invalid action value: " . $action);
 }
-$username = $_POST["username"];
+$username = $_POST["name"];
 $password = $_POST["password"];
 
 
