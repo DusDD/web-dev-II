@@ -14,7 +14,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Convo Chat</title>
+    <title>Chats</title>
     <link rel="stylesheet" href="style/jquery-ui.css">
     <link rel="stylesheet" href="style/live_chat.css">
 </head>
@@ -47,7 +47,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
         <form action="actions/send_message.php">
             <input name="message" placeholder="Type your message"></input>
-            <button type="submit">Send</button>
+            <button type="submit" action="actions/send_message.php">Send</button>
         </form>
 
     </div>
