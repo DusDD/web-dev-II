@@ -8,5 +8,6 @@
 <body>
 <!--navigationbar-->
 <?php include "main_menue.html"; ?>
+
 </body>
 </html>
