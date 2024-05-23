@@ -1,7 +1,11 @@
 <?php
 include_once "database.php";
+include_once "user.php";
 
-class UserSession
+// ensure the current session is loaded
+UserSession::loadUserFromSession();
+
+abstract class UserSession
 {
     private static User|null $user;
 
@@ -51,6 +55,7 @@ class UserSession
 
     public static function getUserId(): int
     {
+        // user must be logged in or this fails!
         return self::$user->getUserId();
     }
 
@@ -85,10 +90,11 @@ class UserSession
         self::$user = null;
     }
 
-    private static function loadUserFromSession(): void
+    public static function loadUserFromSession(): void
     {
         if (isset($_SESSION['user_id'])) {
             self::$user = unserialize($_SESSION['user_data']);
         }
     }
 }
+

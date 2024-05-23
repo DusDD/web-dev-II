@@ -39,7 +39,7 @@ class Database
 
     public static function getConnection(): PDO
     {
-        if (self::$db == null) {
+        if (!isset(self::$db)) {
             self::$db = new Database();
         }
         return self::$db->connection;

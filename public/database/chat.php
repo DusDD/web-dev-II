@@ -176,10 +176,10 @@ class DirectChat extends Chat
         assert(count($this->participants) == 2, "DirectChat has invalid number of participants!");
 
         // extract id from not logged in user
-        $user_id = UserSession::getUserId();
-        $p1 = $this->participants[0];
-        $p2 = $this->participants[1];
-        $this->other_user = User::getByUserId($p1 == $user_id ? $p2 : $p1);
+        $my_user_id = UserSession::getUserId();
+        $user1 = $this->participants[0];
+        $user2 = $this->participants[1];
+        $this->other_user = $user1 == $my_user_id ? $user2 : $user1;
     }
 
 
