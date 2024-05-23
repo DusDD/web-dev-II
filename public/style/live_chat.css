@@ -45,7 +45,7 @@ button:hover {
         "chat-list-container chat-window-container";
     gap: 0; 
     width: 100vw;
-    height: 100vh;
+    height: 100%;
 } 
 
 /* Chat list container LEFT SIDE */
