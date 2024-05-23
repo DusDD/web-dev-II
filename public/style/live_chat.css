@@ -71,20 +71,22 @@ button:hover {
     display: flex;
     border: none;
     border-radius: 0.5em;
-    align-items: center;
+    align-items: left;
     padding: 1em;
     margin: 0.5em;
     flex-direction: column;
 }
 
 .chat-list li {
+    list-style-type: none; /*removes dot from list element*/
     background: #ffefef;
-    padding: 1em;
-    margin: 0.5em;
+    padding: 0.5em;
+    margin: 0.1em;
     flex-direction: column;
     border: none;
     border-radius: 0.5em;
     cursor: pointer;
+    box-shadow: 0 4px 8px #0000001a;;
 }
 
 .chat-list li:hover {
