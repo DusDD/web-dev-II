@@ -84,6 +84,7 @@ button:hover {
     flex-direction: column;
     border: none;
     border-radius: 0.5em;
+    cursor: pointer;
 }
 
 .chat-list li:hover {
