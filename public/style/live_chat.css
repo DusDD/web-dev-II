@@ -40,8 +40,8 @@ button:hover {
 /* Container FULL SITE */
 .container {
     display: grid;
-    grid-template-columns: 1fr 2fr;  
-    grid-template-rows: auto 1fr; 
+    grid-template-columns: 1fr 3fr;  
+    grid-template-rows: auto auto; 
     grid-template-areas: 
         "navbar navbar"
         "chat-list-container chat-window-container";
