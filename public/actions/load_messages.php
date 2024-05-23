@@ -1,6 +1,6 @@
 <?php
-include "../database/user_session.php";
-include "../database/message.php";
+require_once "../database/user_session.php";
+require_once "../database/message.php";
 
 
 if (!UserSession::isLoggedIn()) {

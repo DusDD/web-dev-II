@@ -1,5 +1,5 @@
 <?php
-include "../database/user_session.php";
+require_once "../database/user_session.php";
 
 if (!isset($_POST["action"])) {
     exit("No submit action set!");

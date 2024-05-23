@@ -1,6 +1,6 @@
 <?php
-include_once "database.php";
-include_once "user.php";
+require_once "database.php";
+require_once "user.php";
 
 // ensure the current session is loaded
 UserSession::loadUserFromSession();

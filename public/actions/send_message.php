@@ -1,6 +1,6 @@
 <?php
-include "../database/user_session.php";
-include "../database/chat.php";
+require_once "../database/user_session.php";
+require_once "../database/chat.php";
 
 if (!UserSession::isLoggedIn()) {
     // Redirect if user is not logged in

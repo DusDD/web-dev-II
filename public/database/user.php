@@ -1,7 +1,7 @@
 <?php
 
 require_once "database.php";
-require "chat.php";
+require_once "chat.php";
 
 class User
 {

@@ -1,6 +1,6 @@
 <?php
-include "../database/user_session.php";
-include_once "../database/user.php";
+require_once "../database/user_session.php";
+require_once "../database/user.php";
 
 if (!UserSession::isLoggedIn()) {
     header("Location: /login.html");
