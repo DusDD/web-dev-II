@@ -20,12 +20,10 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 </head>
 <body>
 
-<div class="container">
-
-    <div class="navbar">
     <!--navigationbar-->
     <?php include "main_menue.html"; ?>
-    </div>
+
+<div class="container">
 
     <div class="chat-list-container">
         <h2>Convo Chats</h2>
