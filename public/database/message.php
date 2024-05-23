@@ -10,7 +10,7 @@ class Message
     private string $content;
     private string $sent_date;
 
-    private function __construct(int $message_id, int $sender_id, int $content, string $sent_date)
+    private function __construct(int $message_id, int $sender_id, string $content, string $sent_date)
     {
         $this->message_id = $message_id;
         $this->sender_id = $sender_id;
