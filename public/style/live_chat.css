@@ -55,6 +55,7 @@ button:hover {
     background-color: #ffffff;
     width: 100%;
     height: 100%;
+    align-items: left;
 }
 
 .chat-list-container h2 {
