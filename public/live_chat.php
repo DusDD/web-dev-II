@@ -27,9 +27,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 
     <div class="chat-list-container">
         <h2>Chats</h2>
-        <span class="new-chat-container" action="actions/start_chat.php">
+        <span class="new-chat-container">
             <input type="text" name="new-chat" placeholder="Search for a user...">
-            <button action="actions/start_chat.php">Chat</button>
+            <button onclick="location.href='actions/start_chat.php'">Chat</button>
         </span>
 
         <ul class="chat-list">
@@ -45,9 +45,9 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
             <!-- Messages of the selected chat will be inserted here -->
         </div>
 
-        <form action="actions/send_message.php">
-            <input name="message" placeholder="Type your message"></input>
-            <button type="submit" action="actions/send_message.php">Send</button>
+        <form action="actions/send_message.php" method="post">
+            <input name="message" placeholder="Type your message">
+            <button type="submit">Send</button>
         </form>
 
     </div>
