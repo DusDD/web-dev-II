@@ -80,8 +80,8 @@ button:hover {
 .chat-list li {
     list-style-type: none; /*removes dot from list element*/
     background: #ffefef;
-    padding: 0.5em;
-    margin: 0.1em;
+    padding: 0.8em;
+    margin: 0.5em;
     flex-direction: column;
     border: none;
     border-radius: 0.5em;
