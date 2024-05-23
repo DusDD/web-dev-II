@@ -38,6 +38,18 @@ abstract class Chat
         }
     }
 
+    public static function chatExists($chat_id): bool {
+        $db = Database::getConnection();
+        $stmt = $db->prepare("
+            SELECT 1
+            FROM chats
+            WHERE id = :chat_id
+        ");
+        $stmt->bindParam(":chat_id", $chat_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+
     public static function getByChatId($chat_id): Chat|false
     {
         $db = Database::getConnection();

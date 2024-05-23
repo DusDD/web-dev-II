@@ -4,19 +4,22 @@ include "../database/message.php";
 
 
 if (!UserSession::isLoggedIn()) {
-    // Redirect if user is not logged in
     header("Location: /login.html");
+    exit();
 }
 
 if (!isset($_GET["chat_id"])) {
-    echo json_encode([]);
     exit("Missing chat_id GET value!");
 }
 
-// TODO: error if chat doesn't exist
+$chat_id = $_GET["chat_id"];
+if (!Chat::chatExists($chat_id)) {
+    exit("No chat with id ".$chat_id);
+}
+
 $data = array();
 $user_id = UserSession::getUserId();
-$messages = Message::loadMessagesForChat($_GET["chat_id"]);
+$messages = Message::loadMessagesForChat($chat_id);
 foreach ($messages as $message) {
     $data[] = array(
         "message" => $message->getContent(),

@@ -1,5 +1,10 @@
 <?php
 
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 // ensure session is started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -11,7 +16,6 @@ class UserSession
 
     private function __construct()
     {
-
     }
 
     public static function isLoggedIn(): bool

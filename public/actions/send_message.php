@@ -4,7 +4,7 @@ include "../database/chat.php";
 
 if (!UserSession::isLoggedIn()) {
     // Redirect if user is not logged in
-    header("Location: /public/login.html");
+    header("Location: /login.html");
     exit;
 }
 

@@ -18,6 +18,30 @@ class User
         $this->chats = [];
     }
 
+    public static function completeUsername(string $partialName): array
+    {
+        if (!UserSession::isLoggedIn()) {
+            return array();
+        }
+
+        $db = Database::getConnection();
+        $user_id = UserSession::getUserId();
+        $search_term = "%" . $db->quote($partialName) . "%";
+        $stmt = $db->prepare("
+            SELECT username 
+            FROM users 
+            WHERE id != :user_id AND username LIKE :search_term
+       ");
+        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(":search_term", $search_term);
+        $stmt->execute();
+
+        $usernames = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $usernames[] = $row["username"];
+        }
+        return $usernames;
+    }
 
     public static function usernameExists(string $username): bool
     {
