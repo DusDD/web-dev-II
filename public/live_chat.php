@@ -11,5 +11,5 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 ?>
 
 <?php
-include live_chat.html;
+include "live_chat.html";
 ?>
