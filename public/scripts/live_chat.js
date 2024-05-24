@@ -145,12 +145,14 @@ function startChat(_ev) {
 function sendMessage(ev) {
     ev.preventDefault();
     const selectedChatId = $(".chat.selected").attr("data-chat-id");
-    const message = $('#new-message__input').val();
 
-    if (!selectedChatId) {
+    // Check if selectedChatId is undefined or null
+    if (selectedChatId === undefined || selectedChatId === null) {
         console.debug(`Error: Tried to send message, but no chat is selected!`);
         return;
     }
+
+    const message = $('#new-message__input').val();
 
     $.ajax({
         url: '/actions/send_message.php',
