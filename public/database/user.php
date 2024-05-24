@@ -125,24 +125,14 @@ class User
 
     public function hasDirectChatWith(User $other_user): bool
     {
-        // get the chat ids for all direct chats from this user
-        $my_direct_chats = array_filter($this->getChats(), function ($chat) {
-            return $chat instanceof DirectChat;
-        }, ARRAY_FILTER_USE_BOTH);
-        $my_direct_chat_ids = array_map(function ($chat) {
-            return $chat->getChatId();
-        }, $my_direct_chats);
-        // get all chat ids for the other user:
-        //      filtering for direct chats is not needed, as all elements of the intersection
-        //      must be part of my_direct_chat_ids
-        $other_chat_ids = array_map(function ($chat) {
-            return $chat->getChatId();
-        }, $other_user->getChats());
+        // for each chat of this user, check if it's direct and includes the other user
+        foreach ($this->getChats() as $chat) {
+            if ($chat instanceof DirectChat && $chat->hasUser($other_user)) {
+                return true;
+            }
+        }
 
-
-        // check if a chat is a direct chat from this user and a chat from the other user
-        $shared_chats = array_intersect($my_direct_chat_ids, $other_chat_ids);
-        return !empty($shared_chats);
+        return false;
     }
 
     public function getChats(): array
