@@ -1,51 +1,60 @@
-/* CSS for navigation bar */
-html {
-    font-family: Arial, sans-serif;
+html{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
 
-body {
-    margin: 0; /* Remove default body margin */
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #1f1f1f;
 }
 
-/* Navigation bar */
+:root {
+    --navbar: 75px;
+}
+
 .navbar {
-    display: flex;
-    background-color: #217aff;
-    padding: 10px;
-    width: 100%;
-    height: auto;
     position: fixed;
     top: 0;
-    left: 0;
     z-index: 1000;
-}
-
-.navbar img {
-    width: 100px; 
-    height: auto;
-    margin-right: 20px;
-}
-
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+    width: 100%;
+    height: var(--navbar);
+    background-color: #217aff;
+    align-content: center;
     align-items: center;
 }
 
+.navbar ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
 .navbar li {
-    margin-right: 20px;
+    padding: 0.5em;
+    margin: 0.5em;
+    border: none;
+    border-radius: 1em;
+    text-align: center;
+    text-size-adjust: auto;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.navbar li:hover {
+    transform: scale(1.1);
+    font-weight: bold;
+    background-color: #0040a0;
 }
 
 .navbar a {
-    text-decoration: none;
     color: white;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    text-decoration: none;
 }
 
-.navbar a:hover {
-    background-color: #0040a0;
+.navbar svg {
+    width: auto;
+    height: 1em;
 }
+
