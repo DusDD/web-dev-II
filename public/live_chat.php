@@ -8,8 +8,8 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     header("Location: /login.html");
     exit();
 }
-?>
 
-<?php
+include "main_menue.html";
 include "live_chat.html";
+
 ?>
