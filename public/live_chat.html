@@ -15,10 +15,14 @@
 
         <h2>Chats</h2>
 
-        <span class="new-chat">
+        <form class="new-chat" action="actions/start_chat.php" method="post">
+            <!-- Hidden input field to store the selected username -->
+            <input type="hidden" name="username" id="username" value="">
+            <!-- Input field for user to search for a user -->
             <input type="text" name="new-chat" placeholder="Search for a user...">
-            <button onclick="location.href='actions/start_chat.php'">Chat</button>
-        </span>
+            <!-- Submit button to initiate the chat -->
+            <button type="submit">Chat</button>
+        </form>
 
         <ul class="chat-list">
             <!-- Chats will be listed here  -->
@@ -36,9 +40,11 @@
         </div>
 
         <form class="new-message" action="actions/send_message.php" method="post">
+            <input type="hidden" name="chat_id" id="chat_id" value="">
             <input name="message" placeholder="Type your message">
             <button type="submit">Send</button>
         </form>
+        
 
     </div>
 

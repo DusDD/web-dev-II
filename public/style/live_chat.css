@@ -55,6 +55,7 @@ body {
 .chat-list {
     display: flex;
     flex-direction: column;
+    margin: var(--margin);
 }
 
 .chat-list li {
@@ -81,6 +82,10 @@ body {
 
 .right-container h2 {
     margin-left: var(--margin);
+}
+
+.message-container {
+    margin: var(--margin);
 }
 
 .new-message {
