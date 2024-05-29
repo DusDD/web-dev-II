@@ -15,10 +15,10 @@ require_once "../database/database.php";
 
 if (!isset($_POST["message"])) {
     exit("Missing message value!");
-} else if (!isset($_POST["chats_id"])) {
+} else if (!isset($_POST["chat_id"])) {
     exit("Missing chat id!");
-} else if (!Database::hasUserAccessToChat($_POST["chats_id"])) {
-    exit("Access error: User has no chat with id " . $_POST["chats_id"] . "!");
+} else if (!Database::hasUserAccessToChat($_POST["chat_id"])) {
+    exit("Access error: User has no chat with id " . $_POST["chat_id"] . "!");
 }
 
 $db = Database::getConnection();
@@ -35,7 +35,7 @@ if (!$query->execute()) {
 $query->close();
 
 // Update chat last_active attribute
-$query = $db->prepare("UPDATE chats SET last_active = ? WHERE id = ?");
+$query = $db->prepare("UPDATE chat SET last_active = ? WHERE id = ?");
 $query->bind_param('si', $current_datetime, $_POST["chats_id"]);
 if (!$query->execute()) {
     exit("Error updating chat last_active!");
