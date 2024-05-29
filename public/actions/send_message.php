@@ -27,8 +27,8 @@ $db = Database::getConnection();
 $current_datetime = date('Y-m-d H:i:s');
 
 // Insert the new message into the database
-$query = $db->prepare("INSERT INTO messages (chats_id, sender_id, content, sent_date) VALUES (?, ?, ?, ?)");
-$query->bind_param('iiss', $_POST["chats_id"], $_SESSION["user_id"], $_POST["message"], $current_datetime);
+$query = $db->prepare("INSERT INTO messages (chat_id, sender_id, content, sent_date) VALUES (?, ?, ?, ?)");
+$query->bind_param('iiss', $_POST["chat_id"], $_SESSION["users_id"], $_POST["message"], $current_datetime);
 if (!$query->execute()) {
     exit("Error creating new message!");
 }
