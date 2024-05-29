@@ -1,0 +1,49 @@
+
+:root {
+    --navbar: 75px;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    height: var(--navbar);
+    background-color: #217aff;
+    align-content: center;
+    align-items: center;
+}
+
+.navbar ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.navbar li {
+    padding: 0.5em;
+    margin: 0.5em;
+    border: none;
+    border-radius: 1em;
+    text-align: center;
+    text-size-adjust: auto;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.navbar li:hover {
+    transform: scale(1.1);
+    font-weight: bold;
+    background-color: #0040a0;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar svg {
+    width: auto;
+    height: 1em;
+}
+

@@ -41,10 +41,9 @@ if ($action == "login") {
     $_SESSION["logged_in"] = true;
     $_SESSION["username"] = $_POST["name"];
     $_SESSION["user_id"] = $row["id"];
-    echo "Welcome " . $_SESSION["username"] . "!<br>";
 
     // Redirect to live chat
-    header("Location: /public/live_chat.php");
+    header("Location: /live_chat.php");
 
 } else if ($action == "register") {
     // Check if username already exists
@@ -57,12 +56,21 @@ if ($action == "login") {
     }
 
     // Insert new user into the database
-    $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
-    $insert_stmt = $db->prepare("INSERT INTO users (username, password_hash) VALUES (?, ?)");
-    $insert_stmt->bind_param("ss", $_POST["name"], $password_hash);
-    if ($insert_stmt->execute()) {
-        echo "Registration successful!<br>";
-    } else {
-        exit("Registration failed. Please try again later.");
+    $passwor_min_length = 8;
+    if (isset ($_POST["password"])) {
+        if (strlen($_POST["password"]) >= $passwor_min_length)
+        {
+            $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+            $insert_stmt = $db->prepare("INSERT INTO users (username, password_hash) VALUES (?, ?)");
+            $insert_stmt->bind_param("ss", $_POST["name"], $password_hash);
+            if ($insert_stmt->execute()) {
+                echo "Registration successful!<br>";
+            } else {
+                exit("Registration failed. Please try again later.");
+            }
+        } else{
+            echo "Password too short. It must be at least " .$passwor_min_length. "characters long.<br>";
+        }
     }
+    
 }

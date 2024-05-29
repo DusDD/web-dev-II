@@ -12,12 +12,17 @@
             <div class="username">
                 Maria
             </div>
+            <div class="username">
+                Dinchevo
+            </div>
         </div>
         <div class="rechte_seite">
-            <form action="send_message.php" method="post">
-                <input type="text" id="nombre" name="nombre">
-                <button type="submit">Send</button>
-            </form>
+            <div class="center_below">
+                <form action="send_message.php" method="post">
+                    <input type="text" name="nombre">
+                    <button type="submit">Send</button>
+                </form>
+            </div>
         </div>
     </body>
 </html>

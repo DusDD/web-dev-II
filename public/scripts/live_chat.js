@@ -1,6 +1,6 @@
 function loadChats() {
     $.ajax({
-        url: '/public/actions/load_chats.php',
+        url: '/actions/load_chats.php',
         type: 'GET',
         dataType: "json",
         success: updateChatElements
@@ -99,7 +99,7 @@ function loadMessages() {
     }
 
     $.ajax({
-        url: '/public/actions/load_messages.php',
+        url: '/actions/load_messages.php',
         type: 'GET',
         dataType: "json",
         data: {chat_id: chatId},
@@ -132,7 +132,7 @@ function startChat(_ev) {
     if (username.length === 0) return;
     console.debug(`starting chat with ${username}`);
     $.ajax({
-        url: "/public/actions/start_chat.php",
+        url: "/actions/start_chat.php",
         type: "POST",
         data: {username},
         success: function (data) {
@@ -145,15 +145,17 @@ function startChat(_ev) {
 function sendMessage(ev) {
     ev.preventDefault();
     const selectedChatId = $(".chat.selected").attr("data-chat-id");
-    const message = $('#new-message__input').val();
 
-    if (!selectedChatId) {
+    // Check if selectedChatId is undefined or null
+    if (selectedChatId === undefined || selectedChatId === null) {
         console.debug(`Error: Tried to send message, but no chat is selected!`);
         return;
     }
 
+    const message = $('#new-message__input').val();
+
     $.ajax({
-        url: '/public/actions/send_message.php',
+        url: '/actions/send_message.php',
         type: 'POST',
         data: {chat_id: parseInt(selectedChatId), message},
         success: function () {
@@ -167,7 +169,7 @@ function sendMessage(ev) {
 
 function usernameCompletion(request, response) {
     $.ajax({
-        url: "/public/actions/autocomplete_username.php",
+        url: "/actions/autocomplete_username.php",
         dataType: "json",
         data: {
             search_string: request.term

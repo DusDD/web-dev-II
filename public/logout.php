@@ -1,9 +1,13 @@
 <?php
+session_start();
 
-// Make sure the user is really logged in
-if (session_status() == PHP_SESSION_ACTIVE) {
-    session_unset();
+
+// Check if the user is logged in
+if (isset($_SESSION['user_id'])) {    
+    $_SESSION  = array();
     session_destroy();
-    header('Location: login.php');
+    
+    header("Location: /login.html");
     exit();
 }
+?>

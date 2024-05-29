@@ -1,17 +1,21 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #214058, #2e67be, #214058);
-    margin: 0;
-    height: 100%;   /*stops scrolling*/
-    overflow: hidden;
+
+
+select {
+    position: fixed;  
+    bottom: 5%;     
+    right: 5%;      
+    padding: 10px;    
+    font-size: 16px;  
+    z-index: 1000;    
+    border: none;
+    outline: 0;
 }
 
+
+/* wave animation */
+
 .wave {
-    background: rgba(189, 215, 255);
+    background: white;
     border-radius: 1000% 1000% 0 0;
     position: fixed;
     width: 200%;
@@ -38,26 +42,34 @@ body {
 
 @keyframes wave {
     2% {
-        transform: translateX(1);
+        transform: translateX(0);
     }
-
     25% {
         transform: translateX(-25%);
     }
-
     50% {
         transform: translateX(-50%);
     }
-
     75% {
         transform: translateX(-25%);
     }
-
     100% {
-        transform: translateX(1);
+        transform: translateX(0);
     }
 }
 
+/* overall design */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;   /*stops scrolling*/
+    overflow: hidden;
+}
 
 .box {
     width: 90%;
@@ -80,7 +92,6 @@ label {
 input {
     width: calc(100% - 15px);
     height: 20px;
-    background: rgb(189, 215, 255);
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -90,7 +101,6 @@ input {
 
 input::placeholder{
 	text-align: center;
-	color: #2e67be;
  }
 
 .button-group {
@@ -104,7 +114,6 @@ button {
     color: #fff;
     border: none;
     border-radius: 5px;
-    background: #217aff;
     cursor: pointer;
     transition: transform 200ms;
 	margin-left: 10px;
@@ -112,7 +121,6 @@ button {
 }
 
 button:hover {
-    background-color: #0040a0;
     transform: scale(1.1);
 }
 
@@ -122,3 +130,48 @@ img {
     display: block;
     margin: 0 auto 20px;
 }
+
+/* blue design*/
+
+body.blue{
+    background: linear-gradient(to bottom, #214058, #2e67be, #214058);
+}
+
+input.blue{
+    background: rgb(189, 215, 255);
+}
+
+input.blue::placeholder{
+    color: #2e67be;
+}
+
+button.blue{
+    background: #217aff;
+}
+
+button.blue:hover{
+    background-color: #0040a0;
+}
+
+/* yellow design */
+
+body.yellow {
+    background: linear-gradient(to bottom, #d5ad0d, #ffeb55, #d5ad0d);
+}
+
+input.yellow {
+    background: #fff296;
+}
+
+input.yellow::placeholder{
+	color: #d5ad0d;
+ }
+
+button.yellow {
+    background: #ffe100;
+}
+
+button.yellow:hover {
+    background-color: #d5ad0d;
+}
+

@@ -7,7 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     // Redirect if user is not logged in
-    header("Location: /public/login.html");
+    header("Location: /login.html");
     exit;
 }
 
@@ -35,7 +35,7 @@ if (!$query->execute()) {
 $query->close();
 
 // Update chat last_active attribute
-$query = $db->prepare("UPDATE chats SET last_active = ? WHERE id = ?");
+$query = $db->prepare("UPDATE chat SET last_active = ? WHERE id = ?");
 $query->bind_param('si', $current_datetime, $_POST["chat_id"]);
 if (!$query->execute()) {
     exit("Error updating chat last_active!");

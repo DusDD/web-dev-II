@@ -1,26 +1,23 @@
 body {
     display: flex;
-    min-height: 100vh;   /*stops scrolling*/
+    min-height: 100vh;   /* Detiene el desplazamiento */
     overflow: hidden;
     margin: 0;
 }
 
-.linke_seite
-{
+.linke_seite {
     width: 20%;
     border-right: 1px solid black;
     box-sizing: border-box;
 }
 
-.rechte_seite
-{
+.rechte_seite {
     width: 80%;
     background-image: url(background.png);
+    position: relative; /* Necesario para que los elementos hijos con posición absoluta se posicionen respecto a este contenedor */
 }
 
-
-.convo_chat
-{
+.convo_chat {
     color: #217aff;
     text-align: center;
     border-bottom: 1px dashed grey;
@@ -31,17 +28,48 @@ body {
     border-bottom: 1px solid black;
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 0.2em;
     text-align: center;
     font-size: 105%;
-    padding: 10px;
+    padding: 0.5em;
     transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Suaviza la transición */
     background-color: #f0f8ff; /* Color de fondo inicial */
     border-radius: 5px; /* Bordes redondeados */
 }
 
 .username:hover {
-    transform: scale(1.1); /* Hace un zoom del 10% */
+    transform: scale(1.05); /* Hace un zoom del 10% */
     background-color: #e0f7ff; /* Cambio de color de fondo en hover */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
 
+.center_below {
+    position: absolute;
+    bottom: 20px; /* Ajusta según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%; /* Ancho total del contenedor del formulario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form input {
+    width: 45em; /* Ancho del 70% del contenedor del formulario */
+    margin: 0.5em;
+    padding: 0.6em;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+form button {
+    width: 4em; /* Ancho del 10% del contenedor del formulario */
+    margin: 0.5em;
+    padding: 0.6em;
+    font-size: 1em;
+}
+
+button:hover
+{
+    background-color: #217aff;
+}

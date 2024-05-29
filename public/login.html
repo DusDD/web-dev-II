@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <title>Convo Messenger</title>
     <link rel="stylesheet" href="style/login.css">
     <link rel="icon" href="images/favicon.png" type="image/x-icon">
 </head>
-
 <body>
+    
     <div class="box">
-        <img src="images/logo.png">
+        <img id="blue" src="images/logo_blue.svg" alt="Blue Logo" style="display: none;">
+        <img id="yellow" src="images/logo_yellow.svg" alt="Yellow Logo" style="display: none;">
+        
         <form action="actions/authenticate.php" method="post">
             <label>
                 <input type="text" name="name" placeholder="Your Username" required>
@@ -30,5 +32,29 @@
         <div class="wave"></div>
         <div class="wave"></div>
     </div>
+
+    <select id="select">
+        <option value="yellow">yellow</option>
+        <option selected="selected" value="blue">blue</option>
+    </select>
+
+    <script src="scripts/login.js"></script>
+    <script>
+        // Disable zoom on ctrl+scroll and ctrl+plus/minus
+        document.addEventListener('wheel', function(event) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('keydown', function(event) {
+            if ((event.ctrlKey && (event.key === '+' || event.key === '-')) || 
+                (event.metaKey && (event.key === '+' || event.key === '-'))) {
+                event.preventDefault();
+            }
+        }, false);
+    </script>
 </body>
 </html>
+
+
