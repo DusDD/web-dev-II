@@ -1,0 +1,9 @@
+body {
+    background-color: black;
+}
+
+#formular {
+    border: 0.5em solid white;
+    border-radius: 10px;
+    height: 30em;
+}
