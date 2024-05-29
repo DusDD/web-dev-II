@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$timeout_duration = 1800; // 1min = 60
+$timeout_duration = 60; // 1min = 60
 
 if (isset($_SESSION['user_id'])) {
     // Check if the timeout variable is set
