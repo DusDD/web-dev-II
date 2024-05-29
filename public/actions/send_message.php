@@ -15,10 +15,10 @@ require_once "../database/database.php";
 
 if (!isset($_POST["message"])) {
     exit("Missing message value!");
-} else if (!isset($_POST["chat_id"])) {
+} else if (!isset($_POST["chats_id"])) {
     exit("Missing chat id!");
-} else if (!Database::hasUserAccessToChat($_POST["chat_id"])) {
-    exit("Access error: User has no chat with id " . $_POST["chat_id"] . "!");
+} else if (!Database::hasUserAccessToChat($_POST["chats_id"])) {
+    exit("Access error: User has no chat with id " . $_POST["chats_id"] . "!");
 }
 
 $db = Database::getConnection();
