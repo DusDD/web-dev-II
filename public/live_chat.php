@@ -9,7 +9,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     exit();
 }
 
-include ("activity_check.php");
+include "activity_check.php";
 include "main_menue.html";
 include "live_chat.html";
 
