@@ -131,8 +131,10 @@ function buildMessageElements(messages) {
     });
 }
 
-function startChat(_ev) {
-    const username = $(".new-chat__input").val().trim();
+function startChat(ev) {
+    ev.preventDefault();
+    
+    const username = $("#new-chat__input").val().trim();
     if (username.length === 0) return;
     console.debug(`starting chat with ${username}`);
     $.ajax({
