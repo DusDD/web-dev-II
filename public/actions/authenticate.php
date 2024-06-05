@@ -23,7 +23,7 @@ $db = Database::getConnection();
 
 if ($action == "login") {
     // Check if an account with the given username exists
-    $stmt = $db->prepare("SELECT id, password_hash FROM users WHERE username = ?");
+    $stmt = $db->prepare("SELECT id, password_hash, is_admin FROM users WHERE username = ?");
     $stmt->bind_param("s", $_POST["name"]);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -47,11 +47,9 @@ if ($action == "login") {
     if ($row["is_admin"] == 1) {
         // Redirect to admin dashboard or perform admin specific actions
         header("Location: /admin_console.html");
-        exit();
     } else {
         // Redirect to live chat
         header("Location: /live_chat.php");
-        exit();
     }
 
 } else if ($action == "register") {
