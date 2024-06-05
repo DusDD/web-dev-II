@@ -41,15 +41,15 @@ if ($action == "login") {
     $_SESSION["logged_in"] = true;
     $_SESSION["username"] = $_POST["name"];
     $_SESSION["user_id"] = $row["id"];
-    $_SESSION["admin"] = $row["is_admin"]; //comprobar si la row se llama así, también para el de abajo
+    $_SESSION["admin"] = $row["is_admin"]; 
 
     // Check if the user is an admin
     if ($row["is_admin"] == 1) {
         // Redirect to admin dashboard or perform admin specific actions
-        header("Location: /admin_console.html");
+        header("Location: ../admin_console.html");
     } else {
         // Redirect to live chat
-        header("Location: /live_chat.php");
+        header("Location: ../live_chat.php");
     }
 
 } else if ($action == "register") {
