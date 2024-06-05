@@ -41,9 +41,9 @@
 
         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 
-        <form class="new-message" action="actions/send_message.php" method="post" target="dummyframe">
+        <form id="new-message__form" class="new-message" action="actions/send_message.php" method="post" target="dummyframe">
             <input type="hidden" name="chat_id" id="chat_id" value="">
-            <input name="message" placeholder="Type your message">
+            <input id="new-message__input" name="message" placeholder="Type your message">
             <button type="submit">Send</button>
         </form>
         

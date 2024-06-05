@@ -148,7 +148,7 @@ function startChat(_ev) {
 
 function sendMessage(ev) {
     ev.preventDefault();
-    const selectedChatId = $(".chat.selected").attr("data-chat-id");
+    const selectedChatId = $(".chat.selected").data("chat-id");
 
     // Check if selectedChatId is undefined or null
     if (selectedChatId === undefined || selectedChatId === null) {
