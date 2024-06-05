@@ -81,12 +81,12 @@ function addChatClickAction() {
         ev.target.classList.add("selected");
 
         // Set chat id in send message element
-        $(".new-message #chat_id").attr("chat_id", $(".chat.selected").attr("chat-id"));
+        $(".new-message #chat_id").attr("value", $(".chat.selected").data("chat-id"));
 
 
         // Load messages for selected chat
         loadMessages();
-    });
+    });s
 }
 
 
