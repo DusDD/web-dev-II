@@ -39,7 +39,9 @@
             <!-- Messages of the selected chat will be inserted here -->
         </div>
 
-        <form class="new-message" action="actions/send_message.php" method="post">
+        <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+
+        <form class="new-message" action="actions/send_message.php" method="post" target="dummyframe">
             <input type="hidden" name="chat_id" id="chat_id" value="">
             <input name="message" placeholder="Type your message">
             <button type="submit">Send</button>

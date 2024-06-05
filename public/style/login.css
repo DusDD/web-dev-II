@@ -175,9 +175,18 @@ button.yellow:hover {
     background-color: #d5ad0d;
 }
 
-#disclaimer
+#disclaimer{
+    margin-top: 2em;
+    display: block;
+    text-align: center;
+}
+
+#disclaimer a
 {
-    display: flex;
-    margin-top: 1em;
-    justify-content: center;
+    text-decoration: none;
+    color: grey;
+}
+
+#disclaimer a:hover{
+    color: #414141;
 }

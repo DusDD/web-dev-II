@@ -35,7 +35,7 @@ if (!$query->execute()) {
 $query->close();
 
 // Update chat last_active attribute
-$query = $db->prepare("UPDATE chat SET last_active = ? WHERE id = ?");
+$query = $db->prepare("UPDATE chats SET last_active = ? WHERE id = ?");
 $query->bind_param('si', $current_datetime, $_POST["chat_id"]);
 if (!$query->execute()) {
     exit("Error updating chat last_active!");
