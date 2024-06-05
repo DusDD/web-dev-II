@@ -86,7 +86,7 @@ function addChatClickAction() {
 
         // Load messages for selected chat
         loadMessages();
-    });s
+    });
 }
 
 
