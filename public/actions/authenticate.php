@@ -46,10 +46,12 @@ if ($action == "login") {
     // Check if the user is an admin
     if ($row["is_admin"] == 1) {
         // Redirect to admin dashboard or perform admin specific actions
-        header("Location: ../admin_console.html");
+        header("Location: /admin_console.html");
+        exit();
     } else {
         // Redirect to live chat
-        header("Location: ../live_chat.php");
+        header("Location: /live_chat.php");
+        exit();
     }
 
 } else if ($action == "register") {
