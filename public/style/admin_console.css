@@ -1,9 +1,73 @@
-body {
-    background-color: black;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-#formular {
-    border: 0.5em solid white;
-    border-radius: 10px;
-    height: 30em;
+.centertable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.table-container {
+    width: 70%; /* Ajusta el tamaño de la tabla aquí */
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableheader {
+    background-color: beige;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+td, th {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+.btn {
+    width: 30%; /* Ajusta el tamaño de los botones aquí */
+    padding: 5px;
+}
+
+.delete {
+    background-color: red;
+}
+
+.admin {
+    background-color: yellow;
+}
+
+header {
+    text-align: center;
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 85% 85% / 30%;
+}
+
+header .overlay {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    color: #FFF;
+    text-shadow: 1px 1px 1px #333;
+    background-image: linear-gradient(135deg, #14eecd69 10%, #085afd6b 100%);
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 80px;
+    margin-bottom: 30px;
 }
