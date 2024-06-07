@@ -121,7 +121,10 @@ button:hover {
     margin: var(--margin);
     background-color:#000000;
     border-radius: 5px;
-    flex-direction: row;
+    position: fixed;
+    display: block;
+    height: 80%;
+    width: 100%;
 }
 
 .new-message {
@@ -149,7 +152,6 @@ button:hover {
     margin-bottom: 5px;
     margin: var(--margin);
     text-align: right;
-    width: auto;
     display: block;
 }
 
@@ -162,6 +164,5 @@ button:hover {
     padding: 10px;
     margin-bottom: 5px;
     margin: var(--margin); 
-    width: auto;
     display: block;
 }
