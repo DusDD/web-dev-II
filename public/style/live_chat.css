@@ -109,6 +109,8 @@ button:hover {
     width: 100%;
     height: 100%;
     margin: var(--margin);
+    border: none;
+    border-radius: 5px;
 }
 
 .right-container h2 {
@@ -124,6 +126,7 @@ button:hover {
 .new-message {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .new-message input{
@@ -137,11 +140,12 @@ button:hover {
 }
 
 .message.sent {
-    background-color: #45699e;
+    background-color: #556886;
     color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px;
+    display: inline-block;
     width: auto;
     margin-bottom: 5px;
     height: auto;
@@ -157,6 +161,7 @@ button:hover {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 5px;
+    display: inline-block;
     width: auto;
     height: auto;  
     margin: var(--margin); 
