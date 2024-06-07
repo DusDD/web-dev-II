@@ -119,15 +119,30 @@ function buildMessageElements(messages) {
     const container = document.querySelector(".message-container");
     container.innerHTML = "";
 
+    let lastDate = null;
     messages.forEach(msg => {
         let wrapper = document.createElement("div");
         wrapper.classList.add("message");
         wrapper.classList.add(msg["is_sender"] ? "sent" : "received");
-        container.appendChild(wrapper);
+
+        let curDate = new Date(msg["date"]);
+        // check this message was sent on a 'new' date (i.e. the last message wasn't sent on the same day)
+        if (lastDate == null
+            || curDate.getFullYear() !== lastDate.getFullYear()
+            || curDate.getMonth() !== lastDate.getMonth()
+            || curDate.getDay() !== lastDate.getDay()) {
+            // display the date of the message in a new element
+            let dateElement = document.createElement("div");
+            dateElement.innerText = curDate.toDateString();
+            container.appendChild(dateElement);
+        }
 
         let text = document.createElement("p");
-        text.innerText = `[${msg["date"]}] ${msg["message"]}`;
+        text.innerText = `[${curDate.getHours()}:${curDate.getMinutes()}] ${msg["message"]}`;
         wrapper.appendChild(text);
+        container.appendChild(wrapper);
+
+        lastDate = curDate;
     });
 }
 
