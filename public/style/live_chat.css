@@ -121,6 +121,11 @@ button:hover {
     margin: var(--margin);
     background-color:#000000;
     border-radius: 5px;
+    overflow-y: scroll;
+    flex-direction: column-reverse;
+}
+
+right-container > message-container{
     height: 80%;
     width: 100%;
 }
@@ -128,7 +133,7 @@ button:hover {
 .new-message {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: right;
 }
 
 .new-message input{
@@ -141,6 +146,12 @@ button:hover {
     padding: var(--padding);
 }
 
+.message {
+    display: block;
+    width: fit-content;
+    max-width: 90%;
+}
+
 .message.sent {
     background-color: #556886;
     color: #fff;
@@ -149,8 +160,7 @@ button:hover {
     padding: 10px;
     margin-bottom: 5px;
     margin: var(--margin);
-    text-align: right;
-    display: block;
+    align-self: flex-start;
 }
 
 
@@ -162,5 +172,5 @@ button:hover {
     padding: 10px;
     margin-bottom: 5px;
     margin: var(--margin); 
-    display: block;
+    align-self: flex-end;
 }
