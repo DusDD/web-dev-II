@@ -31,7 +31,33 @@ $other_user_id = $user_row["id"];
 $user_query->close();
 
 // Check if there is already a chat with the person
-// Implement this part
+// Get all chat ids for this user
+$query = $db->prepare("SELECT chat_id FROM user_chat_mappings WHERE user_id = ?");
+$query->bind_param("i", $_SESSION["user_id"]);
+$query->execute();
+$result = $query->get_result();
+$my_chat_ids = array();
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $my_chat_ids[] = $row["chat_id"];
+    }
+}
+// Get chat ids for other user
+$query = $db->prepare("SELECT chat_id FROM user_chat_mappings WHERE user_id = ?");
+$query->bind_param("i", $other_user_id);
+$query->execute();
+$result = $query->get_result();
+$other_chat_ids = array();
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $other_chat_ids[] = $row["chat_id"];
+    }
+}
+// check if a chat between the users exist
+if (!empty(array_intersect($my_chat_ids, $other_chat_ids))) {
+    exit();
+}
+
 
 // Start a transaction
 $db->begin_transaction();
