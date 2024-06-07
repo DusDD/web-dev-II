@@ -86,6 +86,7 @@ body {
 
 .message-container {
     margin: var(--margin);
+    background-color:#000000;
 }
 
 .new-message {
@@ -101,4 +102,30 @@ body {
 .new-message button{
     margin: var(--margin);
     padding: var(--padding);
+}
+
+.message.sent {
+    background-color: #217aff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 75px;
+    height: auto;
+    align-self: left;
+}
+
+
+.message.received {
+    background-color: #121796;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 75px;
+    height: auto;
+    align-self: right;
+    
 }
