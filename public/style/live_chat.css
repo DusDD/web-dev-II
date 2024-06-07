@@ -12,7 +12,7 @@ body {
     background-color: #2e2e2e;
 }
 
-input {
+.flex-box input {
     background: #ffffff;
     border: none;
     border-radius: 5px;
@@ -20,7 +20,7 @@ input {
     transition: transform 200ms;
 }
 
-input::placeholder {
+.flex-box input::placeholder {
     color: #217aff;
 }
 
