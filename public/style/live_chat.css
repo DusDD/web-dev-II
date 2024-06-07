@@ -163,6 +163,7 @@ right-container > message-container{
     margin-bottom: 5px;
     margin: var(--margin);
     align-self: flex-end;
+    max-width: 50%;
 }
 
 
@@ -175,4 +176,5 @@ right-container > message-container{
     margin-bottom: 5px;
     margin: var(--margin); 
     align-self: flex-start;
+    max-width: 50%;
 }
