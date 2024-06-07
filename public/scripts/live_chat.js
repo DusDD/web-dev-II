@@ -126,7 +126,7 @@ function buildMessageElements(messages) {
         container.appendChild(wrapper);
 
         let text = document.createElement("p");
-        text.innerText = msg["message"];
+        text.innerText = `[${msg["date"]}] ${msg["message"]}`;
         wrapper.appendChild(text);
     });
 }
