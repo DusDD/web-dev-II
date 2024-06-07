@@ -12,6 +12,18 @@ body {
     background-color: #2e2e2e;
 }
 
+input {
+    background: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 200ms;
+}
+
+input::placeholder {
+    color: #217aff;
+}
+
 button {
     background: #217aff;
     color: #fff;
@@ -22,7 +34,7 @@ button {
 }
 
 button:hover {
-    transform: scale(1.1);
+    transform: scale(0.9);
     background-color: #0040a0;
 }
 
@@ -125,7 +137,7 @@ button:hover {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
-    width: 75px;
+    width: auto;
     height: auto;
 }
 
@@ -137,7 +149,6 @@ button:hover {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
-    width: 75px;
-    height: auto;
-    
+    width: auto;
+    height: auto;   
 }
