@@ -19,7 +19,10 @@ if (!isset($_POST["message"])) {
     exit("Missing chat id!");
 } else if (!Database::hasUserAccessToChat($_POST["chat_id"])) {
     exit("Access error: User has no chat with id " . $_POST["chat_id"] . "!");
+} else if (strlen(trim($_POST["message"])) == 0) {
+    exit("Message doesn't contain any text!");
 }
+
 
 $db = Database::getConnection();
 
