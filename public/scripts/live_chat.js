@@ -138,7 +138,12 @@ function buildMessageElements(messages) {
         }
 
         let text = document.createElement("p");
-        text.innerText = `[${curDate.getHours()}:${curDate.getMinutes()}] ${msg["message"]}`;
+        if(msg["is_sender"] ) {
+            text.innerText = `${msg["message"]} [${curDate.getHours()}:${curDate.getMinutes()}]`;
+        }else{
+            text.innerText = `[${curDate.getHours()}:${curDate.getMinutes()}] ${msg["message"]}`;
+        }
+        
         wrapper.appendChild(text);
         container.appendChild(wrapper);
 
