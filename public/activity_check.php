@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$timeout_duration = 60; // 1 Minute = 60 Sekunden
+$timeout_duration = 10 * 60; // 1 Minute = 60 Sekunden
 
 if (isset($_SESSION['user_id'])) {
     // Prüfen, ob das Timeout-Variable gesetzt ist
@@ -25,7 +25,7 @@ if (isset($_SESSION['user_id'])) {
             exit();
         }
     }
-    
+
     // Zeitstempel der letzten Aktivität aktualisieren
     $_SESSION['last_activity'] = time();
 } else {

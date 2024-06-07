@@ -30,20 +30,8 @@ class Database
         //echo "Connection information: " . $this->connection->host_info . "<br>";
     }
 
-    function __destruct()
+    public static function hasUserAccessToChat($chatId)
     {
-        $this->connection->close();
-    }
-
-    public static function getConnection()
-    {
-        if (self::$db == null) {
-            self::$db = new Database();
-        }
-        return self::$db->connection;
-    }
-
-    public static function hasUserAccessToChat($chatId) {
         if (!isset($_SESSION) || !isset($_SESSION["user_id"])) {
             return false;
         }
@@ -57,5 +45,18 @@ class Database
         $result = $stmt->get_result();
 
         return $result->num_rows > 0;
+    }
+
+    public static function getConnection()
+    {
+        if (self::$db == null) {
+            self::$db = new Database();
+        }
+        return self::$db->connection;
+    }
+
+    function __destruct()
+    {
+        $this->connection->close();
     }
 }

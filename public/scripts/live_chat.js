@@ -221,5 +221,5 @@ $(document).ready(function () {
     setInterval(function () {
         loadChats();
         loadMessages();
-    }, 5000);
+    }, 60*1000);
 });
