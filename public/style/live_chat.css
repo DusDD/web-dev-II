@@ -110,7 +110,6 @@ button:hover {
     height: 100%;
     margin: var(--margin);
     border: none;
-    border-radius: 5px;
 }
 
 .right-container h2 {
@@ -121,6 +120,8 @@ button:hover {
 .message-container {
     margin: var(--margin);
     background-color:#000000;
+    border-radius: 5px;
+    flex-direction: row;
 }
 
 .new-message {
@@ -146,9 +147,10 @@ button:hover {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 5px;
-    height: auto;
     margin: var(--margin);
     text-align: right;
+    width: auto;
+    display: inline-block;
 }
 
 
@@ -159,6 +161,7 @@ button:hover {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 5px;
-    height: auto;  
     margin: var(--margin); 
+    width: auto;
+    display: inline-block;
 }
