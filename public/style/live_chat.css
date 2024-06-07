@@ -12,6 +12,17 @@ body {
     background-color: #2e2e2e;
 }
 
+.flex-box input {
+    background: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: text;
+}
+
+.flex-box input::placeholder {
+    color: #217aff;
+}
+
 button {
     background: #217aff;
     color: #fff;
@@ -22,7 +33,7 @@ button {
 }
 
 button:hover {
-    transform: scale(1.1);
+    transform: scale(0.9);
     background-color: #0040a0;
 }
 
@@ -119,25 +130,26 @@ button:hover {
 }
 
 .message.sent {
-    background-color: #217aff;
+    background-color: #217896;
     color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px;
-    margin-bottom: 10px;
-    width: 75px;
+    width: auto;
+    margin-bottom: 5px;
     height: auto;
+    margin: var(--margin);
 }
 
 
 .message.received {
-    background-color: #121796;
+    background-color: #2e2e2e;
     color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px;
-    margin-bottom: 10px;
-    width: 75px;
-    height: auto;
-    
+    margin-bottom: 5px;
+    width: auto;
+    height: auto;  
+    margin: var(--margin); 
 }
