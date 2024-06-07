@@ -150,7 +150,7 @@ button:hover {
     margin: var(--margin);
     text-align: right;
     width: auto;
-    display: inline-block;
+    display: block;
 }
 
 
@@ -163,5 +163,5 @@ button:hover {
     margin-bottom: 5px;
     margin: var(--margin); 
     width: auto;
-    display: inline-block;
+    display: block;
 }
