@@ -118,6 +118,7 @@ button:hover {
 }
 
 .message-container {
+    display: flex;
     margin: var(--margin);
     background-color:#000000;
     border-radius: 5px;
@@ -160,7 +161,7 @@ right-container > message-container{
     padding: 10px;
     margin-bottom: 5px;
     margin: var(--margin);
-    align-self: flex-start;
+    align-self: flex-end;
 }
 
 
@@ -172,5 +173,5 @@ right-container > message-container{
     padding: 10px;
     margin-bottom: 5px;
     margin: var(--margin); 
-    align-self: flex-end;
+    align-self: flex-start;
 }
