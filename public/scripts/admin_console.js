@@ -10,10 +10,15 @@ function loadUsers() {
 function buildUserTable(users) {
     console.log("users data:");
     console.log(users);
+
+    // clear existing user rows
+    $(".user-row").remove();
+
+    // fill the users table with the supplied users data
     const usersTable = $("#users-table");
-    usersTable.children(':gt(0)').remove();
     users.forEach(user => {
         let row = document.createElement("tr");
+        row.classList.add("user-row");
 
         let idEl = document.createElement("td");
         idEl.innerText = user["id"];
