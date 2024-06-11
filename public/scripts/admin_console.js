@@ -59,7 +59,7 @@ function buildUserTable(users) {
             $.ajax({
                 url: '/actions/admin/change_admin.php',
                 type: 'POST',
-                data: {user_id: user["id"], make_admin: !user["is_admin"]},
+                data: {user_id: user["id"], make_admin: user["is_admin"] ? 0 : 1},
                 dataType: "json",
                 success: updatedAdminPopup,
                 error: console.error
