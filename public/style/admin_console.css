@@ -43,10 +43,12 @@ td, th {
 }
 
 .admin.is_admin{
+    color: black;
     background-color: red;
 }
 
 .admin.is_user{
+    color: white;
     background-color: green;
 }
 
