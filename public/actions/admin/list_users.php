@@ -20,6 +20,8 @@ $result = $db->query("SELECT id, username, is_admin FROM users");
 $users = array();
 // Assume at least 1 user exists
 while ($row = $result->fetch_assoc()) {
+    // Convert is_admin to bool
+    $row["is_admin"] = $row["is_admin"] == 1;
     $users[] = $row;
 }
 
