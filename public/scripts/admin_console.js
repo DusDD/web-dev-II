@@ -26,7 +26,7 @@ function buildUserTable(users) {
         let deleteBtn = document.createElement("button");
         deleteBtn.classList.add("delete", "btn");
         deleteBtn.innerText = "X";
-        deleteBtn.addEventListener("click", (ev) => {
+        deleteBtn.addEventListener("click", (_ev) => {
             $.ajax({
                 url: '/actions/admin/delete_user.php',
                 type: 'POST',
@@ -50,6 +50,16 @@ function buildUserTable(users) {
             adminBtn.classList.add("is_user");
         }
         // TODO: add make admin functionality
+        adminBtn.addEventListener("click", (_ev)=>{
+            $.ajax({
+                url: '/actions/admin/change_admin.php',
+                type: 'POST',
+                data: {user_id: user["id"], make_admin: !user["is_admin"]},
+                dataType: "json",
+                success: updatedAdminPopup,
+                error: console.error
+            });
+        })
         let adminBtnEl = document.createElement("td");
         adminBtnEl.appendChild(adminBtn);
         row.appendChild(adminBtnEl);
@@ -66,6 +76,19 @@ function deleteUserPopup(metrics) {
 Chats removed: ${metrics["deleted_chats"]}<br>
 Mappings removed: ${metrics["deleted_mappings"]}<br>
 Messaged removed: ${metrics["deleted_messages"]}<br>`
+    });
+    popup.appendTo("body");
+    popup.dialog();
+
+    // reload users table
+    loadUsers();
+}
+
+function updatedAdminPopup(success) {
+    console.log(`update admin success: ${success}`);
+    let popup = $("<div>", {
+        title: "Admin permission update",
+        text: success ? "Success" : "Failure"
     });
     popup.appendTo("body");
     popup.dialog();
