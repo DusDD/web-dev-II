@@ -41,6 +41,11 @@ function buildUserTable(users) {
 
         let adminBtn = document.createElement("button");
         adminBtn.classList.add("admin", "btn");
+        if (user["is_admin"]) {
+            adminBtn.innerText = "Revoke admin";
+        } else {
+            adminBtn.innerText = "Make admin";
+        }
         // TODO: add make admin functionality
         let adminBtnEl = document.createElement("td");
         adminBtnEl.appendChild(adminBtn);

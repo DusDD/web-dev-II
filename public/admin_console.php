@@ -41,19 +41,7 @@ if (!$_SESSION["admin"]) {
                 <th>Delete</th>
                 <th>Admin</th>
             </tr>
-            <tr>
-                <td>Udo Erdmann</td>
-                <td>
-                    <form action="/deleteuser.php" method="post">
-                        <button class="delete btn" type="submit">X</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="/makeadmin.php" method="post">
-                        <button class="admin btn" type="submit">Admin</button>
-                    </form>
-                </td>
-            </tr>
+            <!-- Users will be inserted by JS here -->
         </table>
     </div>
 </div>
