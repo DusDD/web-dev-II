@@ -147,6 +147,14 @@ function buildMessageElements(messages) {
         msgTime.innerText = `${curDate.getHours()}:${curDate.getMinutes()}`;
         wrapper.appendChild(msgTime)
 
+        let deleteBtn = document.createElement("button");
+        deleteBtn.classList.add("delete-button");
+        wrapper.appendChild(deleteBtn);
+        let deleteImg = document.createElement("img");
+        deleteImg.setAttribute("src", "/images/icons8-delete-96.png")
+        deleteImg.setAttribute("alt", "Delete");
+        deleteBtn.appendChild(deleteImg);
+
         container.appendChild(wrapper);
         lastDate = curDate;
     });

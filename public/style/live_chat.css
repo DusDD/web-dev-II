@@ -183,3 +183,20 @@ right-container > message-container{
     bottom: 5px; /* Position it at the bottom */
     right: 10px; /* Align it to the right */
 }
+
+.delete-button {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: #ff4d4d;
+    cursor: pointer;
+    font-size: 0.8em;
+    display: none; /* Hide the button by default */
+}
+
+.message:hover .delete-button {
+    display: block; /* Show the button on hover */
+}
