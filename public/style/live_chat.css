@@ -186,7 +186,7 @@ right-container > message-container{
 
 .delete-button {
     position: absolute;
-    top: .6em;
+    top: .1em;
     right: .4em;
     background-color: transparent;
     border: none;
