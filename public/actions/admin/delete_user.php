@@ -72,7 +72,7 @@ $user_del_query->close();
 
 // If the admin deleted himself, log him out
 if ($user_id == $_SESSION["user_id"]) {
-    $_SESSION  = array();
+    $_SESSION = array();
     session_destroy();
 }
 

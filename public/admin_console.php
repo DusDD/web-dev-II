@@ -34,9 +34,10 @@ if (!$_SESSION["admin"]) {
     <br>
     <br>
     <div class="table-container">
-        <table>
+        <table id="users-table">
             <tr class="tableheader">
-                <th>User</th>
+                <th>ID</th>
+                <th>Username</th>
                 <th>Delete</th>
                 <th>Admin</th>
             </tr>
@@ -56,5 +57,12 @@ if (!$_SESSION["admin"]) {
         </table>
     </div>
 </div>
+
+<!-- Load JQuery Libraries before admin_console.js! -->
+<script src="scripts/jquery-3.7.1.js"></script>
+<script src="scripts/jquery-ui.js"></script>
+
+<!-- Load the javascript functionality for this site -->
+<script src="scripts/admin_console.js"></script>
 </body>
 </html>
