@@ -139,6 +139,7 @@ function buildMessageElements(messages) {
 
         let msgText = document.createElement("p");
         msgText.classList.add("message-text");
+        msgText.innerText = msg["message"];
         wrapper.appendChild(msgText);
 
         let msgTime = document.createElement("span");
