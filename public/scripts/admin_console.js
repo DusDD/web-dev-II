@@ -86,7 +86,7 @@ Messaged removed: ${metrics["deleted_messages"]}<br>`
     popup.dialog();
 
     // reload users table
-    setTimeout(loadUsers, 300);
+    setTimeout(loadUsers, 100);
 }
 
 function updatedAdminPopup(success) {
@@ -99,7 +99,7 @@ function updatedAdminPopup(success) {
     popup.dialog();
 
     // reload users table
-    setTimeout(loadUsers, 300);
+    setTimeout(loadUsers, 100);
 }
 
 function exportData() {
