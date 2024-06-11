@@ -36,7 +36,7 @@ function buildUserTable(users) {
             });
         })
 
-        usersTable.appendChild(row);
+        usersTable.append(row);
     })
 }
 
