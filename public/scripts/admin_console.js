@@ -11,7 +11,7 @@ function buildUserTable(users) {
     console.log("users data:");
     console.log(users);
     const usersTable = $("#users-table");
-    usersTable.innerHTML = "";
+    usersTable.empty();
     users.forEach(user => {
         let row = document.createElement("tr");
 
