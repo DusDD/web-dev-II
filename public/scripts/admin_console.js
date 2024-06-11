@@ -11,6 +11,7 @@ function buildUserTable(users) {
     console.log("users data:");
     console.log(users);
     const usersTable = $("#users-table");
+    usersTable.innerHTML = "";
     users.forEach(user => {
         let row = document.createElement("tr");
 
@@ -43,8 +44,10 @@ function buildUserTable(users) {
         adminBtn.classList.add("admin", "btn");
         if (user["is_admin"]) {
             adminBtn.innerText = "Revoke admin";
+            adminBtn.classList.add("is_admin")
         } else {
             adminBtn.innerText = "Make admin";
+            adminBtn.classList.add("is_user");
         }
         // TODO: add make admin functionality
         let adminBtnEl = document.createElement("td");
@@ -66,6 +69,9 @@ Messaged removed: ${metrics["deleted_messages"]}<br>`
     });
     popup.appendTo("body");
     popup.dialog();
+
+    // reload users table
+    loadUsers();
 }
 
 $(document).ready(function () {

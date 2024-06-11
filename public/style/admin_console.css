@@ -42,8 +42,12 @@ td, th {
     background-color: red;
 }
 
-.admin {
-    background-color: yellow;
+.admin.is_admin{
+    background-color: red;
+}
+
+.admin.is_user{
+    background-color: green;
 }
 
 header {
