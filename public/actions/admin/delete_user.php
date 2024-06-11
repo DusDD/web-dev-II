@@ -70,6 +70,12 @@ $user_del_query->execute();
 $is_user_deleted = $user_del_query->affected_rows;
 $user_del_query->close();
 
+// If the admin deleted himself, log him out
+if ($user_id == $_SESSION["user_id"]) {
+    $_SESSION  = array();
+    session_destroy();
+}
+
 // Return the deletion metrics
 $result = array(
     "is_user_deleted" => $is_user_deleted,
