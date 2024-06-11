@@ -137,16 +137,16 @@ function buildMessageElements(messages) {
             container.appendChild(dateElement);
         }
 
-        let text = document.createElement("p");
-        if(msg["is_sender"] ) {
-            text.innerText = `${msg["message"]} [${curDate.getHours()}:${curDate.getMinutes()}]`;
-        }else{
-            text.innerText = `[${curDate.getHours()}:${curDate.getMinutes()}] ${msg["message"]}`;
-        }
-        
-        wrapper.appendChild(text);
-        container.appendChild(wrapper);
+        let msgText = document.createElement("p");
+        msgText.classList.add("message-text");
+        wrapper.appendChild(msgText);
 
+        let msgTime = document.createElement("span");
+        msgTime.classList.add("message-time");
+        msgTime.innerText = `${curDate.getHours()}:${curDate.getMinutes()}`;
+        wrapper.appendChild(msgTime)
+
+        container.appendChild(wrapper);
         lastDate = curDate;
     });
 }

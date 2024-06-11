@@ -148,33 +148,38 @@ right-container > message-container{
 }
 
 .message {
+    position: relative;  /* For time label positioning */
     display: block;
     width: fit-content;
-    max-width: 90%;
+    max-width: 50%;
     overflow-wrap: anywhere;
-}
-
-.message.sent {
-    background-color: #556886;
-    color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 5px;
     margin: var(--margin);
+    color: #fff;
+}
+
+.message.sent {
+    background-color: #556886;
     align-self: flex-end;
-    max-width: 50%;
 }
 
 
 .message.received {
     background-color: #2e2e2e;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 5px;
-    margin: var(--margin); 
     align-self: flex-start;
-    max-width: 50%;
+}
+
+.message-text {
+    margin: 0 2.5em 0 0; /* Margin to the right so the time is not displayed on top of the text */
+}
+
+.message-time {
+    font-size: 0.8em; /* Smaller font size for the time */
+    color: #ccc; /* Lighter color for the time */
+    position: absolute; /* Position it absolutely */
+    bottom: 5px; /* Position it at the bottom */
+    right: 10px; /* Align it to the right */
 }
