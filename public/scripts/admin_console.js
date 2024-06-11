@@ -35,12 +35,16 @@ function buildUserTable(users) {
                 error: console.error
             });
         })
-        row.appendChild(deleteBtn);
+        let deleteEl = document.createElement("td");
+        deleteEl.appendChild(deleteBtn);
+        row.appendChild(deleteEl);
 
         let adminBtn = document.createElement("button");
         adminBtn.classList.add("admin", "btn");
         // TODO: add make admin functionality
-        row.appendChild(adminBtn);
+        let adminBtnEl = document.createElement("td");
+        adminBtnEl.appendChild(adminBtn);
+        row.appendChild(adminBtnEl);
 
         usersTable.append(row);
     })
