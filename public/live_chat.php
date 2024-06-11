@@ -2,7 +2,7 @@
 require_once "database/user_session.php";
 
 // Redirect user to login page if no login data is set
-if (!UserSession::isLoggedIn()) {
+if (!\UserSession\isLoggedIn()) {
     header("Location: /login.html");
     exit();
 }

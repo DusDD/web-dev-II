@@ -1,3 +1,32 @@
+$.ajaxSetup({
+    error: function (xhr) {
+        alert(`Error ${xhr.status} at ${xhr.responseURL}: ${xhr.responseText}`)
+    }
+});
+
+$(document).ready(function () {
+    // Load chats on page load
+    loadChats();
+
+    // Make new chat button create a new chat
+    $("#new-chat__button").on("click", startChat);
+
+    // Send message if user submits a new message
+    $('#new-message__form').submit(sendMessage);
+
+    // Completion functionality on user search
+    $("#new-chat__input").autocomplete({
+        source: usernameCompletion,
+        minLength: 2 // Minimum characters before autocomplete starts
+    });
+
+    // Refresh messages every 5 seconds
+    setInterval(function () {
+        loadChats();
+        loadMessages();
+    }, 5000);
+});
+
 function loadChats() {
     $.ajax({
         url: '/actions/load_chats.php',
@@ -170,31 +199,6 @@ function usernameCompletion(request, response) {
         data: {
             search_string: request.term
         },
-        success: function (data) {
-            response(data);
-        }
+        success: response
     });
 }
-
-$(document).ready(function () {
-    // Load chats on page load
-    loadChats();
-
-    // Make new chat button create a new chat
-    $("#new-chat__button").on("click", startChat);
-
-    // Send message if user submits a new message
-    $('#new-message__form').submit(sendMessage);
-
-    // Completion functionality on user search
-    $("#new-chat__input").autocomplete({
-        source: usernameCompletion,
-        minLength: 2 // Minimum characters before autocomplete starts
-    });
-
-    // Refresh messages every 5 seconds
-    setInterval(function () {
-        loadChats();
-        loadMessages();
-    }, 5000);
-});

@@ -1,18 +1,12 @@
 <?php
-require_once "../database/user_session.php";
+require_once "helper/api_utils.php";
 
-
-if (!UserSession::isLoggedIn()) {
-    // Redirect if user is not logged in
-    header("Location: /login.html");
-}
-
-$user = UserSession::getUser();
-$chats = array();
-foreach ( $user->getChats() as $chat) {
-    $chats[] = array(
+$user_id = ApiUtils\require_login();
+$chats = array_map(function (Chat $chat) {
+    return array(
         "chat_id" => $chat->getChatId(),
         "name" => $chat->getTitle()
     );
-}
-echo json_encode($chats);
+}, Chat::loadChatsForUser($user_id));
+
+ApiUtils\send_success($chats);

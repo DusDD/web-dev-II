@@ -1,6 +1,7 @@
 <?php
 
 require_once "database.php";
+require_once "user_session.php";
 require_once "chat.php";
 
 class User
@@ -8,24 +9,21 @@ class User
     private int $user_id;
     private string $username;
 
-    private array $chats;
-
     public function __construct(int $user_id, string $username)
     {
         // Assume a user with the provided attributes exists
         $this->user_id = $user_id;
         $this->username = $username;
-        $this->chats = [];
     }
 
     public static function completeUsername(string $partialName): array
     {
-        if (!UserSession::isLoggedIn()) {
+        if (!UserSession\isLoggedIn()) {
             return array();
         }
 
         $db = Database::getConnection();
-        $user_id = UserSession::getUserId();
+        $user_id = UserSession\getUserId();
         $search_term = "%" . $db->quote($partialName) . "%";
         $stmt = $db->prepare("
             SELECT username 
@@ -118,9 +116,7 @@ class User
         $map_stmt->execute();
 
         // create and return new chat object
-        $new_chat = new DirectChat($new_chat_id);
-        $this->chats[] = $new_chat;
-        return $new_chat;
+        return new DirectChat($new_chat_id);
     }
 
     public function hasDirectChatWith(User $other_user): bool
@@ -137,15 +133,7 @@ class User
 
     public function getChats(): array
     {
-        if (empty($this->chats)) {
-            $this->loadChats();
-        }
-        return $this->chats;
-    }
-
-    public function loadChats(): void
-    {
-        $this->chats = Chat::loadChatsForUser($this->user_id);
+        return Chat::loadChatsForUser($this->user_id);
     }
 
     public function getUserId(): int

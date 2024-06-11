@@ -1,25 +1,19 @@
 <?php
-require_once "../database/user_session.php";
 require_once "../database/chat.php";
+require_once "helper/api_utils.php";
 
-if (!UserSession::isLoggedIn()) {
-    // Redirect if user is not logged in
-    header("Location: /login.html");
-    exit;
+$user_id = ApiUtils\require_login();
+ApiUtils\require_post_values("message", "chat_id");
+
+$chat_id = $_POST["chat_id"];
+if (!Chat::chatExists($chat_id)) {
+    ApiUtils\send_error("Invalid chat id!", 400);
 }
 
-if (!isset($_POST["message"])) {
-    exit("Missing message value!");
-} else if (!isset($_POST["chat_id"])) {
-    exit("Missing chat id!");
-}
-
-$chat = Chat::getByChatId($_POST["chat_id"]);
-if (!$chat) {
-    exit("Invalid chat id!");
-} else if (!$chat->hasUser(UserSession::getUser())) {
-    exit("User not part of given chat!");
+$chat = Chat::getByChatId($chat_id);
+if (!$chat->hasUserId($user_id)) {
+    ApiUtils\send_error("User not part of given chat!", 403);
 }
 
 $chat->sendMessage($_POST["message"]);
-
+ApiUtils\send_success();

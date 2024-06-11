@@ -1,5 +1,6 @@
 <?php
 require_once "database.php";
+require_once "user_session.php";
 require_once "message.php";
 require_once "user.php";
 
@@ -7,19 +8,13 @@ abstract class Chat
 {
 
     protected int $chat_id;
-    protected array $participants;
-
-    private array $messages;
 
     protected function __construct(int $chat_id)
     {
         $this->chat_id = $chat_id;
-        $this->participants = array();
-        $this->messages = array();
-        $this->loadParticipants();
     }
 
-    protected function loadParticipants(): void
+    protected function getParticipants(): array
     {
         $db = Database::getConnection();
         $stmt = $db->prepare("
@@ -31,10 +26,11 @@ abstract class Chat
         $stmt->bindParam(":chat_id", $this->chat_id, PDO::PARAM_INT);
         $stmt->execute();
 
-        $this->participants = [];
+        $participants = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $this->participants[] = new User($row["id"], $row["username"]);
+           $participants[] = new User($row["id"], $row["username"]);
         }
+        return $participants;
     }
 
     public static function chatExists($chat_id): bool
@@ -61,11 +57,10 @@ abstract class Chat
         $stmt->bindParam(":chat_id", $chat_id, PDO::PARAM_INT);
         $stmt->execute();
 
-        // check if chat exists
         if ($stmt->rowCount() == 0) {
             return false;
         }
-        assert($stmt->rowCount() == 1, "DB has duplicate chat ids!");
+
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row["type"] == "direct" ? new DirectChat($chat_id) : new GroupChat($chat_id);
     }
@@ -102,19 +97,19 @@ abstract class Chat
         }
         return $chats;
     }
-
-    public function getParticipants(): array
+    public function hasUserId(int $user_id): bool
     {
-        return $this->participants;
+        foreach ($this->getParticipants() as $participant) {
+            if ($participant->getUserId() == $user_id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function hasUser(User $user): bool
     {
-        $participants_ids = array_map(function (User $u) {
-            return $u->getUserId();
-        }, $this->participants);
-
-        return in_array($user->getUserId(), $participants_ids);
+        return $this->hasUserId($user->getUserId());
     }
 
     public function getChatId(): int
@@ -126,21 +121,13 @@ abstract class Chat
 
     public function getMessages(): array
     {
-        if (empty($this->messages)) {
-            $this->loadMessages();
-        }
-        return $this->messages;
-    }
-
-    public function loadMessages(): void
-    {
-        $this->messages = Message::loadMessagesForChat($this->chat_id);
+        return Message::loadMessagesForChat($this->chat_id);
     }
 
     public function sendMessage(string $content): void
     {
         $db = Database::getConnection();
-        $sender_id = UserSession::getUserId();
+        $sender_id = UserSession\getUserId();
 
         // create new message in database
         $insert_stmt = $db->prepare("
@@ -162,7 +149,7 @@ abstract class Chat
         $update_stmt->execute();
 
         // reload messages
-        $this->loadMessages();
+        $this->getMessages();
     }
 }
 
@@ -173,12 +160,14 @@ class DirectChat extends Chat
     public function __construct(int $chat_id)
     {
         parent::__construct($chat_id);
-        assert(count($this->participants) == 2, "DirectChat has invalid number of participants!");
 
-        // figure out what participant is not the logged in user
-        $user1 = $this->participants[0];
-        $user2 = $this->participants[1];
-        $this->other_user = $user1->getUserId() == UserSession::getUserId() ? $user2 : $user1;
+        $participants = $this->getParticipants();
+        assert(count($participants) == 2, "DirectChat has invalid number of participants!");
+
+        // figure out what participant is not the logged-in user
+        $user1 = $participants[0];
+        $user2 = $participants[1];
+        $this->other_user = $user1->getUserId() == UserSession\getUserId() ? $user2 : $user1;
     }
 
 
@@ -200,12 +189,12 @@ class GroupChat extends Chat
     public function getTitle(): string
     {
         $title = "";
-        foreach ($this->participants as $user) {
+        foreach ($this->getParticipants() as $participant) {
+            // Add separator if the title already contains a username
             if ($title !== "") {
-                // Add separator if the title already contains a username
                 $title .= ", ";
             }
-            $title .= $user->getUsername();
+            $title .= $participant->getUsername();
         }
 
         return $title;
@@ -215,8 +204,7 @@ class GroupChat extends Chat
     {
         // make sure the user is not already part of the group chat
         $userId = $user->getUserId();
-        $this->loadParticipants();
-        foreach ($this->participants as $participant) {
+        foreach ($this->getParticipants() as $participant) {
             if ($participant->getUserId() == $userId) {
                 return false;
             }

@@ -1,36 +1,31 @@
 <?php
 require_once "../database/user_session.php";
+require_once "helper/api_utils.php";
 
-if (!isset($_POST["action"])) {
-    exit("No submit action set!");
-}
-if (!isset($_POST["name"], $_POST["password"])) {
-    exit("Please enter a valid name and email address!");
-}
+ApiUtils\require_post_values("action", "name", "password");
 
 $action = $_POST["action"];
-if ($action != "login" && $action != "register") {
-    exit("Invalid action value: " . $action);
-}
 $username = $_POST["name"];
 $password = $_POST["password"];
 
+if ($action != "login" && $action != "register") {
+    ApiUtils\send_error("Invalid action value: " . $action, 400);
+}
 
-if (UserSession::isLoggedIn()) {
-    header("Location: /live_chat.php");
-    exit("User is already logged in!");
+if (UserSession\isLoggedIn()) {
+    ApiUtils\send_error("Invalid request: User is already logged in!");
 }
 
 if ($action == "login") {
-    if (UserSession::login($username, $password)) {
-        header("Location: /live_chat.php");
+    if (UserSession\login($username, $password)) {
+        ApiUtils\send_success();
     } else {
-        exit("Login error!");
+        ApiUtils\send_error("Credentials don't match!", 401);
     }
-} else if ($action == "register") {
-    if (UserSession::register($username, $password)) {
-        header("Location: /live_chat.php");
+} else {
+    if (UserSession\register($username, $password)) {
+        ApiUtils\send_success();
     } else {
-        exit("Registration failed. Please try again later.");
+        ApiUtils\send_error("Registration failed!", 500);
     }
 }
