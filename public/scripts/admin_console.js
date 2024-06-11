@@ -102,6 +102,26 @@ function updatedAdminPopup(success) {
     setTimeout(loadUsers, 300);
 }
 
+function exportData() {
+    const dataArea = $("#dataExportArea");
+    $.ajax({
+        url: '/actions/admin/export_data.php',
+        type: 'POST',
+        dataType: "json",
+        success: (data) => {
+            console.log("export data:");
+            console.log(data);
+            dataArea.val(JSON.stringify(data, null, 4));
+        },
+        error: console.error
+    });
+}
+
 $(document).ready(function () {
+    // Load users data and fill the users table
     loadUsers();
+
+    // Add data export functionality
+    const exportButton = document.getElementById("dataExportButton");
+    exportButton.addEventListener("click", exportData);
 });

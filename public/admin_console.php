@@ -46,6 +46,15 @@ if (!$_SESSION["admin"]) {
     </div>
 </div>
 
+<!-- Data export -->
+<div class="centertable">
+    <h3>Data Export:</h3>
+    <button id="dataExportButton">Export</button>
+    <br>
+    <label for="dataExportArea">Data:</label>
+    <textarea id="dataExportArea" readonly></textarea>
+</div>
+
 <!-- Load JQuery Libraries before admin_console.js! -->
 <script src="scripts/jquery-3.7.1.js"></script>
 <script src="scripts/jquery-ui.js"></script>
