@@ -50,5 +50,5 @@ $result = array(
     "user_chat_mappings" => $user_chat_mappings,
     "messages" => $messages
 );
-echo json_encode($result, JSON_PRETTY_PRINT);
+echo json_encode($result);
 exit();
