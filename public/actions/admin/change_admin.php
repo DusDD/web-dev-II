@@ -18,7 +18,7 @@ if (!isset($_POST["user_id"])) {
     exit("POST parameter make_admin is not set!");
 }
 $user_id = $_POST["user_id"];
-$make_admin = $_POST["make_admin"] ? 1 : 0;
+$make_admin = $_POST["make_admin"];
 
 require_once "../../database/database.php";
 
