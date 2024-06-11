@@ -26,7 +26,7 @@ $db = Database::getConnection();
 
 // Load messages from the database
 $chats_query = $db->prepare("
-    SELECT sender_id, content, sent_date
+    SELECT id, sender_id, content, sent_date
     FROM messages
     WHERE chat_id = ?
     ORDER BY sent_date 
@@ -39,7 +39,7 @@ $chats = array();
 if ($chats_result->num_rows > 0) {
     while ($row = $chats_result->fetch_object()) {
         $is_sender = $row->sender_id == $_SESSION["user_id"];
-        $chats[] = array("message" => $row->content, "date" => $row->sent_date, "is_sender" => $is_sender);
+        $chats[] = array("id"=>$row->id, "message" => $row->content, "date" => $row->sent_date, "is_sender" => $is_sender);
     }
 }
 

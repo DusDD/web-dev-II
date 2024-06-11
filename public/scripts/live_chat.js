@@ -147,10 +147,29 @@ function buildMessageElements(messages) {
         msgTime.innerText = `${curDate.getHours()}:${curDate.getMinutes()}`;
         wrapper.appendChild(msgTime)
 
-        let deleteBtn = document.createElement("button");
-        deleteBtn.classList.add("delete-button");
-        deleteBtn.innerText = "X";
-        wrapper.appendChild(deleteBtn);
+        if (msg["is_sender"]) {
+            let deleteBtn = document.createElement("button");
+            deleteBtn.classList.add("delete-button");
+            deleteBtn.innerText = "X";
+            deleteBtn.addEventListener("click", (_ev) => {
+                $.ajax({
+                    url: '/actions/delete_message.php',
+                    type: 'POST',
+                    dataType: "json",
+                    data: {message_id: msg["id"]},
+                    success: (deleted_rows) => {
+                        if (deleted_rows === 1) {
+                            console.log(`Message ${msg["id"]} was removed`);
+                            wrapper.remove();
+                        } else {
+                            console.error(`Error removing message ${msg["id"]}: ${deleted_rows} rows were deleted`);
+                        }
+                    },
+                    error: console.error
+                });
+            });
+            wrapper.appendChild(deleteBtn);
+        }
 
         /*
         let deleteImg = document.createElement("img");
