@@ -8,14 +8,14 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     exit("User is not logged in!");
 }
 
-if (!$_SESSION["admin"]) {
-    exit("Only an admin can delete a user!");
-}
-
 if (!isset($_POST["user_id"])) {
     exit("POST parameter user_id is not set!");
 }
 $user_id = $_POST["user_id"];
+
+if ($user_id != $_SESSION["user_id"] && !$_SESSION["admin"]) {
+    exit("Only an admin can delete another user!");
+}
 
 require_once "../../database/database.php";
 
