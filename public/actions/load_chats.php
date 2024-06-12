@@ -29,7 +29,7 @@ $chats_query = $db->prepare("
         AND ucm2.user_id != ucm.user_id 
     LEFT JOIN users ON ucm2.user_id = users.id
     WHERE ucm.user_id = ?
-    ORDER BY chats.last_active
+    ORDER BY chats.last_active DESC
 ");
 $chats_query->bind_param("i", $user_id);
 $chats_query->execute();
