@@ -4,12 +4,13 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Import credentials
-require_once("credentials.php");
-
 // Enable error reporting
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
+
+// Load ini config file
+$config = parse_ini_file("config.ini", true);
+$db_config = $config["database"];
 
 class Database
 {
@@ -19,8 +20,15 @@ class Database
 
     private function __construct()
     {
+        global $db_config;
         // Create new connection to database
-        $this->connection = new MySQLi(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+        $this->connection = new MySQLi(
+            $db_config["host"],
+            $db_config["user"],
+            $db_config["password"],
+            $db_config["db_name"],
+            $db_config["port"]
+        );
 
         // Check connection
         if ($this->connection->connect_errno) {
