@@ -149,7 +149,7 @@ function buildMessageElements(messages) {
 
         if (msg["is_sender"]) {
             let deleteBtn = document.createElement("button");
-            deleteBtn.classList.add("delete-button");
+            deleteBtn.classList.add("msg-delete-button");
             deleteBtn.innerText = "X";
             deleteBtn.addEventListener("click", (_ev) => {
                 $.ajax({

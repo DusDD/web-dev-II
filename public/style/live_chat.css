@@ -184,7 +184,7 @@ right-container > message-container{
     right: 10px; /* Align it to the right */
 }
 
-.delete-button {
+.msg-delete-button {
     position: absolute;
     top: .1em;
     right: .4em;
@@ -196,6 +196,6 @@ right-container > message-container{
     display: none; /* Hide the button by default */
 }
 
-.message:hover .delete-button {
+.message:hover .msg-delete-button {
     display: block; /* Show the button on hover */
 }
