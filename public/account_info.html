@@ -14,7 +14,12 @@
     <div>.</div>
     <div>.</div>
     <div>
-        <button  type="button" style="background-color: chartreuse;">Delete_Button</button>
+        <form method="post" action="delete_usert.php">
+            <label for="user_id">Benutzer ID: </label>
+            <input type="text" id = "user_id" name="user_id" required>
+            <button  type="submit" name="delete_user" style="background-color: chartreuse;">Account_löschen</button>
+        </form>
+        
     </div>
 </body>
 </html>
