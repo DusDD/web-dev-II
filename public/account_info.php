@@ -12,7 +12,7 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
 }
 
 include "main_menue.html";
-include "account_info.html";
+//include "account_info.html";
 ?>
 
 <!DOCTYPE html>
