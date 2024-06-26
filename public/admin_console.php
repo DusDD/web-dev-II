@@ -33,6 +33,11 @@ if (!$_SESSION["admin"]) {
     </header>
     <br>
     <br>
+    <div>
+    <form action="logout.php" method="post">
+        <button type="submit">Logout</button>
+    </form>
+    </div>
     <div class="table-container">
         <table id="users-table">
             <tr class="tableheader">
