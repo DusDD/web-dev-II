@@ -1,25 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Convo Chat</title>
-    <link rel="stylesheet" href="style/main_menue.css">
-    <link rel="stylesheet" href="style/live_chat.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontoeinstellungen</title>
+    <link rel="stylesheet" href="style/account_info.css">
+    <link rel="icon" href="settings.png" type="image/x-icon">
 </head>
 <body>
-    <div>.</div>
-    <div>.</div>
-    <div>.</div>
-    <div>.</div>
-    <div>.</div>
-    <div>.</div>
-    <div>
-        <form method="post" action="delete_own_account.php">
-            <button  type="submit" name="delete_own_account" style="background-color: chartreuse;">Account_löschen</button>
-        </form>
+    <div class="container">
+        <h1>Kontoeinstellungen</h1>
         
+        <div class="form-container">
+            <h2>Passwort ändern</h2>
+            <form action="https://convo-messenger.de/changepassword.php" method="post">
+                <label for="current-password">Aktuelles Passwort</label>
+                <input type="password" id="current-password" name="current-password" required>
+                
+                <label for="new-password">Neues Passwort</label>
+                <input type="password" id="new-password" name="new-password" required>
+                
+                <label for="confirm-password">Neues Passwort bestätigen</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+                
+                <div class="btn-container">
+                    <button type="submit" class="btn">Passwort ändern</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="form-container">
+            <h2>Konto löschen</h2>
+            <form action="https://convo-messenger.de/deleteaccount.php" method="get">
+                <div class="btn-container">
+                    <button id="delete-account-btn" class="btn danger">Konto löschen</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
-
-
