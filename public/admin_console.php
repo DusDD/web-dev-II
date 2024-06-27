@@ -29,11 +29,9 @@ if (!$_SESSION["admin"]) {
     <header>
         <div class="overlay">
             <h1>Admin Konsole</h1>
-            <div class="logout-container">
-                <form action="logout.php" method="post">
-                    <button class="logoutbutton" type="submit">Logout</button>
-                </form>
-            </div>
+            <form action="logout.php" method="post" class="logout-form">
+                <button class="logoutbutton" type="submit">Logout</button>
+            </form>
         </div>
     </header>
     <br>
