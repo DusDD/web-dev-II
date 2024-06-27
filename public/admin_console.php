@@ -29,15 +29,14 @@ if (!$_SESSION["admin"]) {
     <header>
         <div class="overlay">
             <h1>Admin Konsole</h1>
+            <div class="logout-container">
+                <form action="logout.php" method="post">
+                    <button class="logoutbutton" type="submit">Logout</button>
+                </form>
+            </div>
         </div>
     </header>
     <br>
-    <br>
-    <div>
-        <form action="logout.php" method="post">
-                <button class="logoutbutton" type="submit">Logout</button>
-        </form>
-    </div>
     <br>
     <div class="table-container">
         <table id="users-table">
