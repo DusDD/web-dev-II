@@ -35,9 +35,10 @@ if (!$_SESSION["admin"]) {
     <br>
     <div>
     <form action="logout.php" method="post">
-        <button type="submit">Logout</button>
+        <button class="logoutbutton" type="submit">Logout</button>
     </form>
     </div>
+    <br>
     <div class="table-container">
         <table id="users-table">
             <tr class="tableheader">
