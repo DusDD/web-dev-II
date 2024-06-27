@@ -88,7 +88,7 @@ h1 {
     background-color: rgba(255, 0, 0, 0.568);
     border: 3px solid red;
     border-radius: 2px;
-    font-size: small;
+    font-size: medium;
     box-shadow: 5px 5px 10px rgba(0.2, 0.2, 0.2, 0.2);
     color: white; 
 }
