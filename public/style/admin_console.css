@@ -107,6 +107,8 @@ h1 {
     height: 50em;
 }
 
-.popup {
+.ui-dialog {
     background-color: lightblue;
+    padding: 1em;
+    border-radius: 1em;
 }
