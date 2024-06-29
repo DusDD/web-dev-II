@@ -81,7 +81,7 @@ function deleteUserPopup(metrics) {
         html: `User deleted: ${metrics["is_user_deleted"]}<br>
 Chats removed: ${metrics["deleted_chats"]}<br>
 Mappings removed: ${metrics["deleted_mappings"]}<br>
-Messaged removed: ${metrics["deleted_messages"]}<br>`
+Messages removed: ${metrics["deleted_messages"]}<br>`
     });
     popup.appendTo("body");
     popup.dialog();
