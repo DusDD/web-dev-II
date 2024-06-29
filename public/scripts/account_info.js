@@ -44,6 +44,7 @@ function deleteAccount() {
         success: (data) => {
             console.log("Account deletion was successful!");
             console.log(data);
+            window.location.href = "/";
         },
         error: (err) => {
             console.error(err);
