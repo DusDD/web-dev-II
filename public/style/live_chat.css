@@ -79,7 +79,8 @@ button:hover {
 }
 
 .chat-list {
-    display: flex;
+     /* display: flex; */
+    display: contents;
     flex-direction: column;
     margin: var(--margin);
 }
