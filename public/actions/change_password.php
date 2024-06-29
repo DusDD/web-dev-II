@@ -10,13 +10,13 @@ if (!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true) {
     exit();
 }
 
-if (!isset($_POST["current-password"]) || !isset($_POST["new-password"]) || !isset($_POST["confirm-password"])) {
+if (!isset($_POST["current_password"]) || !isset($_POST["new_password"]) || !isset($_POST["confirm_password"])) {
     exit("Missing POST values!");
 }
 
-$cur_password = $_POST["current-password"];
-$new_password = $_POST["new-password"];
-$confirm_password = $_POST["confirm-password"];
+$cur_password = $_POST["current_password"];
+$new_password = $_POST["new_password"];
+$confirm_password = $_POST["confirm_password"];
 if ($new_password !== $confirm_password) {
     exit("New password and confirmation password do not match!");
 }

@@ -13,7 +13,7 @@
         
         <div class="form-container">
             <h2>Passwort ändern</h2>
-            <form action="https://convo-messenger.de/changepassword.php" method="post">
+            <form>
                 <label for="current-password">Aktuelles Passwort</label>
                 <input type="password" id="current-password" name="current-password" required>
                 
@@ -24,7 +24,7 @@
                 <input type="password" id="confirm-password" name="confirm-password" required>
                 
                 <div class="btn-container">
-                    <button type="submit" class="btn">Passwort ändern</button>
+                    <button id="change-password-btn" type="submit" class="btn">Passwort ändern</button>
                 </div>
             </form>
         </div>
@@ -38,5 +38,13 @@
             </form>
         </div>
     </div>
+
+
+    <!-- Load JQuery Libraries before admin_console.js! -->
+    <script src="scripts/jquery-3.7.1.js"></script>
+    <script src="scripts/jquery-ui.js"></script>
+
+    <!-- Load the javascript functionality for this site -->
+    <script src="scripts/account_info.js"></script>
 </body>
 </html>
