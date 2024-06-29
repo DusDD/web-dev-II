@@ -77,6 +77,7 @@ function deleteUserPopup(metrics) {
     console.log(metrics);
     let popup = $("<div>", {
         title: "Deletion Metrics",
+        class: "popup",
         html: `User deleted: ${metrics["is_user_deleted"]}<br>
 Chats removed: ${metrics["deleted_chats"]}<br>
 Mappings removed: ${metrics["deleted_mappings"]}<br>
@@ -93,7 +94,8 @@ function updatedAdminPopup(success) {
     console.log(`update admin success: ${success}`);
     let popup = $("<div>", {
         title: "Admin permission update",
-        text: success ? "Success" : "Failure"
+        text: success ? "Success" : "Failure",
+        class: "popup"
     });
     popup.appendTo("body");
     popup.dialog();

@@ -106,3 +106,7 @@ h1 {
     width: 70%;
     height: 50em;
 }
+
+.popup {
+    background-color: lightblue;
+}
