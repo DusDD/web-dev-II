@@ -26,12 +26,13 @@ function changePassword() {
             new_password: newPassword,
             confirm_password: confirmPassword
         },
-        success: () => {
+        success: (resp) => {
             console.log("password change was successful!");
+            console.log(resp);
         },
         error: (err) => {
-            console.error(err);
             alert("Password change failed!");
+            console.error(err);
         }
     });
 }
