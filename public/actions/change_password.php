@@ -24,7 +24,7 @@ if ($new_password !== $confirm_password) {
 // Get the account data
 require_once "../database/database.php";
 $db = Database::getConnection();
-$stmt = $db->prepare("SELECT id, password_hash, is_admin FROM users WHERE username = ?");
+$stmt = $db->prepare("SELECT id, password_hash, is_admin FROM users WHERE id = ?");
 $stmt->bind_param("s", $_SESSION["user_id"]);
 $stmt->execute();
 $result = $stmt->get_result();
