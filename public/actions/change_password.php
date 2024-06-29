@@ -46,7 +46,9 @@ if (strlen($new_password) < $password_min_length) {
 // Update password hash in database
 $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
 $stmt = $db->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
-$stmt->bind_param("si", $password_hash, $_SESSION["user_id"]);
+if (!$stmt->bind_param("si", $password_hash, $_SESSION["user_id"])) {
+    exit("Error binding params on password change statement!");
+}
 if ($stmt->execute()) {
     echo "Password update successful!<br>";
 } else {
