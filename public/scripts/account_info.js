@@ -27,8 +27,13 @@ function changePassword() {
             confirm_password: confirmPassword
         },
         success: (resp) => {
-            console.log("password change was successful!");
-            console.log(resp);
+            resp = resp.trim()
+            if (resp.length=== 0) {
+                console.log("password change was successful!");
+                window.location.href = "/";
+            } else {
+                alert(`Error: ${resp}`);
+            }
         },
         error: (err) => {
             alert("Password change failed!");

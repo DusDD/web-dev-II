@@ -51,7 +51,7 @@ if (!$stmt->bind_param("si", $password_hash, $_SESSION["user_id"])) {
     exit("Error binding params on password change statement!");
 }
 if ($stmt->execute()) {
-    echo "Password update successful!<br>";
+    exit();
 } else {
     exit("Password update failed. Please try again later.");
 }
