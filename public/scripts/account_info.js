@@ -21,7 +21,6 @@ function changePassword() {
     $.ajax({
         url: '/actions/change_password.php',
         type: 'POST',
-        dataType: "json",
         data: {
             current_password: currentPassword,
             new_password: newPassword,
@@ -37,7 +36,24 @@ function changePassword() {
     });
 }
 
+function deleteAccount() {
+    $.ajax({
+        url: '/actions/delete_own_account.php',
+        type: 'POST',
+        success: () => {
+            console.log("Account deletion was successful!");
+        },
+        error: (err) => {
+            console.error(err);
+            alert("Account deletion failed!");
+        }
+    });
+}
+
 $(document).ready(function () {
     let changePwdButton = document.getElementById("change-password-btn");
     changePwdButton.addEventListener("click", changePassword);
+
+    let deleteAcctBtn = document.getElementById("delete-account-btn");
+    deleteAcctBtn.addEventListener("click", deleteAccount);
 });
