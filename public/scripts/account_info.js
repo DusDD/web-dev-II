@@ -40,8 +40,10 @@ function deleteAccount() {
     $.ajax({
         url: '/actions/delete_own_account.php',
         type: 'POST',
-        success: () => {
+        dataType: 'json',
+        success: (data) => {
             console.log("Account deletion was successful!");
+            console.log(data);
         },
         error: (err) => {
             console.error(err);
