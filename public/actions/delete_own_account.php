@@ -14,7 +14,7 @@ if (!isset($_SESSION["user_id"])) {
 
 $user_id = $_SESSION["user_id"];
 
-require_once "../../database/database.php";
+require_once "../database/database.php";
 
 // Get all chats containing this user
 $db = Database::getConnection();
